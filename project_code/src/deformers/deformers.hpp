@@ -16,7 +16,8 @@ enum deformer_type_enum {
 
 enum deformer_direction_enum {
 	direction_view_space,
-	direction_surface_normal
+	direction_surface_normal, 
+	direction_z
 };
 
 struct deformer_parameters_structure {
