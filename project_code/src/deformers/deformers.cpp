@@ -28,6 +28,54 @@ void apply_deformation(mesh& shape, numarray<vec3> const& position_before_deform
 
 		float const dist = norm(p_clicked - p_shape_original);         // distance between the picked position and the vertex before deformation
 
+#ifdef SOLUTION
+		float const w = std::exp(-dist * dist / (r * r));
+		if (w > 0.001f)
+		{
+			if (deformer_parameters.type == deform_translate)
+			{
+				vec3 const translation = camera_orientation * vec3(translate_screen, 10.0f);
+				if (deformer_parameters.direction == direction_view_space)
+					p_shape = p_shape_original + w * translation;
+
+				if (deformer_parameters.direction == direction_surface_normal) {
+					if (norm(translation) > 1.0e-3f) {
+						vec3 const translation_normal = dot(translation, n_clicked) * n_clicked;
+						p_shape = p_shape_original + w * translation_normal;
+					}
+				}
+
+			}
+			if (deformer_parameters.type == deform_twist)
+			{
+				float const angle = -w * translate_screen.x * 2 * Pi;
+				rotation_transform R;
+				if (deformer_parameters.direction == direction_view_space)
+				{
+					vec3 const camera_front = camera_orientation.matrix_col_z();
+					R = rotation_transform::from_axis_angle(camera_front, angle);
+				}
+				if (deformer_parameters.direction == direction_surface_normal)
+				{
+					R = rotation_transform::from_axis_angle(n_clicked, angle);
+				}
+				p_shape = p_clicked + R * (p_shape_original - p_clicked);
+			}
+
+			if (deformer_parameters.type == deform_scale)
+			{
+				p_shape = p_clicked + (1 + translate_screen.x * w) * (p_shape_original - p_clicked);
+			}
+
+			if (deformer_parameters.type == deform_noise_perlin) {
+				vec3 const translation = camera_orientation * vec3(translate_screen, 0.0f);
+				vec3 const translation_normal = norm(translation) * dot(normalize(translation), n_clicked) * n_clicked;
+				float const noise = noise_perlin(10.5f * p_shape_original);
+				p_shape = p_shape_original + w * noise * translation_normal;
+			}
+
+		}
+#else
 		// TO DO: Implement the deformation models
 		// **************************************************************** //
 		// ...
@@ -51,6 +99,7 @@ void apply_deformation(mesh& shape, numarray<vec3> const& position_before_deform
 		{
 			// Deformation to implement"
 		}
+#endif
 
 	}
 
