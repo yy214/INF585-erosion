@@ -34,7 +34,7 @@ void apply_deformation(mesh& shape, numarray<vec3> const& position_before_deform
 		{
 			if (deformer_parameters.type == deform_translate)
 			{
-				vec3 const translation = camera_orientation * vec3(translate_screen, 10.0f);
+				vec3 const translation = camera_orientation * vec3(translate_screen, 0.0f);
 				if (deformer_parameters.direction == direction_view_space)
 					p_shape = p_shape_original + w * translation;
 
