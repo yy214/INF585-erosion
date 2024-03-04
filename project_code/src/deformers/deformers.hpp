@@ -7,11 +7,8 @@
 enum deformer_type_enum {
 	deform_translate,
 	deform_twist,
-	deform_scale
-#ifdef SOLUTION
-	,
+	deform_scale,
 	deform_noise_perlin
-#endif
 };
 
 enum deformer_direction_enum {
