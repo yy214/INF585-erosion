@@ -21,15 +21,15 @@ bool gui_parameters::display()
 	ImGui::RadioButton("Translate",ptr_deformer_type, deform_translate); ImGui::SameLine();
     ImGui::RadioButton("Twist",ptr_deformer_type, deform_twist); ImGui::SameLine();
     ImGui::RadioButton("Scale",ptr_deformer_type, deform_scale);
-#ifdef SOLUTION
+	
 	ImGui::SameLine();
 	ImGui::RadioButton("Perlin Noise",ptr_deformer_type, deform_noise_perlin);
-#endif
 
 	ImGui::Text("Deformer direction:"); // Select the type of deformation to apply
 	int* ptr_deformer_direction = (int*)&deformer_parameters.direction;
     ImGui::RadioButton("View space",ptr_deformer_direction, direction_view_space); ImGui::SameLine();
-    ImGui::RadioButton("Surface normal",ptr_deformer_direction, direction_surface_normal);
+    ImGui::RadioButton("Surface normal",ptr_deformer_direction, direction_surface_normal); ImGui::SameLine();
+	ImGui::RadioButton("Always z axis", ptr_deformer_direction, direction_z);
 
 	// Select falloff distance using slider
     ImGui::SliderFloat("Falloff distance", &deformer_parameters.falloff, 0.01f, 0.8f);

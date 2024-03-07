@@ -3,7 +3,7 @@
 {
 	"folders": [
 		{
-			"name": "Scene-02_interactive_deformers",
+			"name": "project_code",
 			"path": "."
 		},
 		{
@@ -21,8 +21,8 @@
 			"type": "cppdbg",
 			"request": "launch",
 			"name": "C++ Run",
-			"program": "${workspaceFolder:Scene-02_interactive_deformers}/build/02_interactive_deformers",
-			"cwd": "${workspaceFolder:Scene-02_interactive_deformers}",
+			"program": "${workspaceFolder:Scene-project_code}/build/project_code",
+			"cwd": "${workspaceFolder:Scene-project_code}",
 			"linux": {
 				"MIMode": "gdb"
 			},

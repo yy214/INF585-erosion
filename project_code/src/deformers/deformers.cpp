@@ -28,21 +28,29 @@ void apply_deformation(mesh& shape, numarray<vec3> const& position_before_deform
 
 		float const dist = norm(p_clicked - p_shape_original);         // distance between the picked position and the vertex before deformation
 
-#ifdef SOLUTION
+
 		float const w = std::exp(-dist * dist / (r * r));
 		if (w > 0.001f)
 		{
 			if (deformer_parameters.type == deform_translate)
 			{
+<<<<<<< HEAD
 				vec3 const translation = camera_orientation * vec3(translate_screen, 1.0f);
+=======
+				vec3 const translation = camera_orientation * vec3(translate_screen, 0.0f);
+>>>>>>> 12a8e8ef83a2859a5a553016e93d73b0f0a86e3b
 				if (deformer_parameters.direction == direction_view_space)
 					p_shape = p_shape_original + w * translation;
 
-				if (deformer_parameters.direction == direction_surface_normal) {
+				else if (deformer_parameters.direction == direction_surface_normal) {
 					if (norm(translation) > 1.0e-3f) {
 						vec3 const translation_normal = dot(translation, n_clicked) * n_clicked;
 						p_shape = p_shape_original + w * translation_normal;
 					}
+				}
+
+				else if(deformer_parameters.direction == direction_z){
+					p_shape = p_shape_original + w * translate_screen.y * vec3(0, 0, 1);
 				}
 
 			}
@@ -70,38 +78,20 @@ void apply_deformation(mesh& shape, numarray<vec3> const& position_before_deform
 			if (deformer_parameters.type == deform_noise_perlin) {
 				vec3 const translation = camera_orientation * vec3(translate_screen, 0.0f);
 				vec3 const translation_normal = norm(translation) * dot(normalize(translation), n_clicked) * n_clicked;
+<<<<<<< HEAD
 				float const noise = noise_perlin(3.5f * p_shape_original);
 				p_shape = p_shape_original + w * noise * translation_normal;
+=======
+				float const noise = noise_perlin(10.5f * p_shape_original);
+				if (deformer_parameters.direction == direction_view_space){
+					p_shape = p_shape_original + w * noise * translation_normal;
+				}
+				else if(deformer_parameters.direction == direction_z){
+					p_shape = p_shape_original + w * noise * translate_screen.y * vec3(0, 0, 1);
+				}
+>>>>>>> 12a8e8ef83a2859a5a553016e93d73b0f0a86e3b
 			}
 
 		}
-#else
-		// TO DO: Implement the deformation models
-		// **************************************************************** //
-		// ...
-		if (deformer_parameters.type == deform_translate) // Case of translation
-		{
-			// Hint: You can convert the 2D translation in screen space into a 3D translation in the view plane in multiplying 
-			//       camera_orientation * vec3(translate_screen, 0)
-			vec3 const translation = camera_orientation * vec3(translate_screen, 0.0f);
-
-			// Fake deformation (linear translation in the screen space) 
-			//   the following lines should be modified to get the expected smooth deformation
-			if (dist < r)
-				p_shape = p_shape_original + (1 - dist / r) * translation;
-
-		}
-		if (deformer_parameters.type == deform_twist)
-		{
-			// Deformation to implement
-		}
-		if (deformer_parameters.type == deform_scale)
-		{
-			// Deformation to implement"
-		}
-#endif
-
 	}
-
-
 }
