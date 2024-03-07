@@ -34,7 +34,7 @@ void apply_deformation(mesh& shape, numarray<vec3> const& position_before_deform
 		{
 			if (deformer_parameters.type == deform_translate)
 			{
-				vec3 const translation = camera_orientation * vec3(translate_screen, 10.0f);
+				vec3 const translation = camera_orientation * vec3(translate_screen, 1.0f);
 				if (deformer_parameters.direction == direction_view_space)
 					p_shape = p_shape_original + w * translation;
 
@@ -70,7 +70,7 @@ void apply_deformation(mesh& shape, numarray<vec3> const& position_before_deform
 			if (deformer_parameters.type == deform_noise_perlin) {
 				vec3 const translation = camera_orientation * vec3(translate_screen, 0.0f);
 				vec3 const translation_normal = norm(translation) * dot(normalize(translation), n_clicked) * n_clicked;
-				float const noise = noise_perlin(10.5f * p_shape_original);
+				float const noise = noise_perlin(3.5f * p_shape_original);
 				p_shape = p_shape_original + w * noise * translation_normal;
 			}
 
