@@ -38,6 +38,8 @@ project(${executable_name})
 
 # Add current src/ directory
 include_directories("src")
+include_directories ("lib/eigen-3.4.0")
+include_directories ("lib/igl")
 
 # Add the lib directory
 include_directories(${ABS_PATH_TO_CGP})

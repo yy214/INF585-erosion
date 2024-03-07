@@ -3,11 +3,9 @@
 #include "../environment.hpp"
 #include "../datastructure/HalfedgeBuilder.h"
 #include "../datastructure/HalfedgeDS.h"
-#include "../igl/cotmatrix.h"
-
 #include <Eigen/Dense>
 #include <Eigen/Sparse>
-
+#include <cotmatrix.h>
 #include <iostream>
 
 

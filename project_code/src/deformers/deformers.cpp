@@ -34,11 +34,7 @@ void apply_deformation(mesh& shape, numarray<vec3> const& position_before_deform
 		{
 			if (deformer_parameters.type == deform_translate)
 			{
-<<<<<<< HEAD
-				vec3 const translation = camera_orientation * vec3(translate_screen, 1.0f);
-=======
 				vec3 const translation = camera_orientation * vec3(translate_screen, 0.0f);
->>>>>>> 12a8e8ef83a2859a5a553016e93d73b0f0a86e3b
 				if (deformer_parameters.direction == direction_view_space)
 					p_shape = p_shape_original + w * translation;
 
@@ -78,10 +74,6 @@ void apply_deformation(mesh& shape, numarray<vec3> const& position_before_deform
 			if (deformer_parameters.type == deform_noise_perlin) {
 				vec3 const translation = camera_orientation * vec3(translate_screen, 0.0f);
 				vec3 const translation_normal = norm(translation) * dot(normalize(translation), n_clicked) * n_clicked;
-<<<<<<< HEAD
-				float const noise = noise_perlin(3.5f * p_shape_original);
-				p_shape = p_shape_original + w * noise * translation_normal;
-=======
 				float const noise = noise_perlin(10.5f * p_shape_original);
 				if (deformer_parameters.direction == direction_view_space){
 					p_shape = p_shape_original + w * noise * translation_normal;
@@ -89,7 +81,6 @@ void apply_deformation(mesh& shape, numarray<vec3> const& position_before_deform
 				else if(deformer_parameters.direction == direction_z){
 					p_shape = p_shape_original + w * noise * translate_screen.y * vec3(0, 0, 1);
 				}
->>>>>>> 12a8e8ef83a2859a5a553016e93d73b0f0a86e3b
 			}
 
 		}
