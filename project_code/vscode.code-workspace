@@ -35,6 +35,13 @@
 				"trace": true
 			}
 		}]
-	  }
+	},
+	"settings": {
+		"files.associations": {
+			"chrono": "cpp",
+			"functional": "cpp",
+			"*.ipp": "cpp"
+		}
+	}
 
 }
