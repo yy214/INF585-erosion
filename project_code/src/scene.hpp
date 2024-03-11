@@ -16,6 +16,12 @@
 
 #include "deformers/deformers.hpp"
 
+#include "datastructure/HalfedgeBuilder.h"
+#include "datastructure/HalfedgeDS.h"
+
+#include <Eigen/Dense>
+#include <Eigen/Sparse>
+
 using cgp::mesh_drawable;
 
 
@@ -27,6 +33,7 @@ struct deforming_shape_structure
 	cgp::mesh_drawable visual;               // Visual representation of the deformed shape
 
 	bool require_normal_update;              // indicator if the normals need to be updated
+	//HalfedgeDS &halfEdgeDS;
 
 	void update_normal();
 	void new_shape(surface_type_enum type_of_surface = surface_plane);
@@ -58,6 +65,11 @@ struct scene_structure : scene_inputs_generic {
 	cgp::picking_structure picking;
 	picking_visual_parameters picking_visual;
 	cgp::timer_event_periodic timer_update_normal; // timer with periodic events used to update the normals
+
+
+	///DIMITRI CODE
+	//HalfedgeDS halfEdgeDS;
+	//HalfedgeBuilder builder;
 
 
 

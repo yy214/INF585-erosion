@@ -1,8 +1,6 @@
 
 #include "initialization.hpp"
 #include "../environment.hpp"
-#include "../datastructure/HalfedgeBuilder.h"
-#include "../datastructure/HalfedgeDS.h"
 #include <Eigen/Dense>
 #include <Eigen/Sparse>
 #include <cotmatrix.h>
@@ -33,21 +31,6 @@ mesh initialize_plane()
     Eigen::SparseMatrix<double> L;
     igl::cotmatrix(V, F, L);
     std::cout << "Hello, mesh: " << std::endl << L * V << std::endl;
-
-    //The Half-edge data structure
-    Eigen::MatrixXi eigenConnectivity(initMesh.connectivity.size(), 3);
-    for (int i = 0; i < eigenConnectivity.rows(); i++) {
-        Eigen::Vector3i nextRow;
-        nextRow << initMesh.connectivity[i][0], initMesh.connectivity[i][1], initMesh.connectivity[i][2];
-        eigenConnectivity.row(i) = nextRow;
-    }
-    HalfedgeBuilder builder = HalfedgeBuilder();
-    HalfedgeDS eigenMesh = builder.createMesh(eigenConnectivity.rows(), eigenConnectivity);
-
-    //Testing the Structure
-    std::cout << eigenMesh.getEdge(23);
-    std::cout << "aaaaaaaaaaaaaaa";
-
 
     //size_t const N = shape.position.size();
     for (size_t k = 0; k < N*N; ++k)

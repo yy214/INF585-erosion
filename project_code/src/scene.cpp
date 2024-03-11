@@ -1,5 +1,11 @@
 #include "scene.hpp"
 
+#include "datastructure/HalfedgeBuilder.h"
+#include "datastructure/HalfedgeDS.h"
+#include <Eigen/Dense>
+#include <Eigen/Sparse>
+
+#include <cmath>
 
 using namespace cgp;
 
@@ -52,6 +58,20 @@ void scene_structure::initialize()
 	timer_update_normal.event_period = 0.15f;
 	deforming_shape.new_shape();
 	picking_visual.initialize();
+
+	//Initializing the Halfedge Data Structure, only have to do it once
+	//The Half-edge data structure
+	Eigen::MatrixXi eigenConnectivity(deforming_shape.shape.connectivity.size(), 3);
+	for (int i = 0; i < eigenConnectivity.rows(); i++) {
+		Eigen::Vector3i nextRow;
+		nextRow << deforming_shape.shape.connectivity[i][0], deforming_shape.shape.connectivity[i][1], deforming_shape.shape.connectivity[i][2];
+		eigenConnectivity.row(i) = nextRow;
+	}
+	//HalfedgeBuilder builder = HalfedgeBuilder();
+	//HalfedgeDS eMesh = 
+	//deforming_shape.halfEdgeDS = std::unique_ptr<HalfedgeDS>(builder.createMesh(eigenConnectivity.rows(), eigenConnectivity));
+
+
 }
 
 
@@ -106,6 +126,72 @@ void scene_structure::mouse_click_event()
 void scene_structure::keyboard_event()
 {
 	camera_control.action_keyboard(environment.camera_view);
+	if (inputs.keyboard.down)
+	{
+		std::cout << "doooooooooooooooooooooooown";
+		vec3 translationVec = vec3(0.0f, 0.0f, 0.05f);
+
+		// Current translation in 2D window coordinates
+		vec2 const& p = inputs.mouse.position.current;
+		vec2 const translation_screen = p - picking.screen_clicked;
+
+		// Apply the deformation on the surface:: 
+		//apply_deformation(deforming_shape.shape, deforming_shape.position_saved, translation_screen, picking.position, picking.normal, camera_control.camera_model.orientation(), gui.deformer_parameters);
+
+		deforming_shape.position_saved = deforming_shape.shape.position;
+		//Put me into one function!
+		//The Half-edge data structure
+		Eigen::MatrixXi eigenConnectivity(deforming_shape.shape.connectivity.size(), 3);
+		for (int i = 0; i < eigenConnectivity.rows(); i++) {
+			Eigen::Vector3i nextRow;
+			nextRow << deforming_shape.shape.connectivity[i][0], deforming_shape.shape.connectivity[i][1], deforming_shape.shape.connectivity[i][2];
+			eigenConnectivity.row(i) = nextRow;
+		}
+		HalfedgeBuilder builder = HalfedgeBuilder();
+		HalfedgeDS eMesh = builder.createMesh(eigenConnectivity.rows(), eigenConnectivity);
+
+		for (int v = 0; v < deforming_shape.shape.position.size(); v++) {
+			vec3 sumVertices = vec3(0.0, 0.0, 0.0);
+
+			//Traversing the indices
+			int vertexCount = 1;
+			int ee = eMesh.getEdge(v);
+			int pEdge = eMesh.getOpposite(eMesh.getNext(ee));
+			sumVertices += deforming_shape.position_saved[eMesh.getTarget(eMesh.getOpposite(pEdge))];
+
+			// finding the sum of the neighboring vertices
+			while (pEdge != ee) {
+				vertexCount += 1;
+				pEdge = eMesh.getOpposite(eMesh.getNext(pEdge));
+				vec3 surroundPos = deforming_shape.position_saved[eMesh.getTarget(eMesh.getOpposite(pEdge))];
+				//surroundPos[2] = pow(surroundPos[2], 0.5); for fun
+				sumVertices += surroundPos;
+			}
+
+			//sumVertices /= float(vertexCount);
+
+
+			
+
+
+			deforming_shape.shape.position[v] = sumVertices / float(vertexCount);
+		}
+
+		
+		//
+		//for (int v = 0; v < deforming_shape.shape.position.size(); v++) {
+		//	deforming_shape.shape.position[v] += translationVec;
+		//}
+
+		// Update the visual model
+		
+		deforming_shape.visual.vbo_position.update(deforming_shape.shape.position);
+		deforming_shape.require_normal_update = true;
+
+		deforming_shape.shape.normal_update();
+
+		deforming_shape.visual.vbo_normal.update(deforming_shape.shape.normal);
+	}
 }
 void scene_structure::idle_frame()
 {
