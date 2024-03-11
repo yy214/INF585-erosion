@@ -128,7 +128,6 @@ void scene_structure::keyboard_event()
 	camera_control.action_keyboard(environment.camera_view);
 	if (inputs.keyboard.down)
 	{
-		std::cout << "doooooooooooooooooooooooown";
 		vec3 translationVec = vec3(0.0f, 0.0f, 0.05f);
 
 		// Current translation in 2D window coordinates
@@ -152,20 +151,24 @@ void scene_structure::keyboard_event()
 
 		for (int v = 0; v < deforming_shape.shape.position.size(); v++) {
 			vec3 sumVertices = vec3(0.0, 0.0, 0.0);
+			float sumZ = 0.0;
 
 			//Traversing the indices
 			int vertexCount = 1;
 			int ee = eMesh.getEdge(v);
 			int pEdge = eMesh.getOpposite(eMesh.getNext(ee));
-			sumVertices += deforming_shape.position_saved[eMesh.getTarget(eMesh.getOpposite(pEdge))];
+			vec3 surroundPos = deforming_shape.position_saved[eMesh.getTarget(eMesh.getOpposite(pEdge))];
+			sumVertices += surroundPos;
+			sumZ += surroundPos[2];
 
 			// finding the sum of the neighboring vertices
 			while (pEdge != ee) {
 				vertexCount += 1;
 				pEdge = eMesh.getOpposite(eMesh.getNext(pEdge));
-				vec3 surroundPos = deforming_shape.position_saved[eMesh.getTarget(eMesh.getOpposite(pEdge))];
-				//surroundPos[2] = pow(surroundPos[2], 0.5); for fun
+				surroundPos = deforming_shape.position_saved[eMesh.getTarget(eMesh.getOpposite(pEdge))];
+				//surroundPos[2] = pow(surroundPos[2], 0.5);
 				sumVertices += surroundPos;
+				sumZ += surroundPos[2];
 			}
 
 			//sumVertices /= float(vertexCount);
@@ -174,7 +177,10 @@ void scene_structure::keyboard_event()
 			
 
 
-			deforming_shape.shape.position[v] = sumVertices / float(vertexCount);
+			//deforming_shape.shape.position[v] = sumVertices / float(vertexCount);
+			//deforming_shape.shape.position[v][2] = sumZ / float(vertexCount);
+			deforming_shape.shape.position[v] -= translationVec;
+			deforming_shape.shape.color[v][0] = (deforming_shape.shape.position[v][2] - 0.25) * 5.0;
 		}
 
 		
@@ -191,6 +197,7 @@ void scene_structure::keyboard_event()
 		deforming_shape.shape.normal_update();
 
 		deforming_shape.visual.vbo_normal.update(deforming_shape.shape.normal);
+		deforming_shape.visual.vbo_color.update(deforming_shape.shape.color);
 	}
 }
 void scene_structure::idle_frame()

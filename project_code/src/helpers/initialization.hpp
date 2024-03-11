@@ -8,3 +8,6 @@ cgp::mesh initialize_cylinder();
 cgp::mesh initialize_sphere();
 cgp::mesh initialize_cube();
 cgp::mesh initialize_mesh();
+
+
+float normal_pdf(float x, float m, float s);
