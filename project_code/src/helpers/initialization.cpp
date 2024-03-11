@@ -37,8 +37,11 @@ mesh initialize_plane()
     {
             vec3& p_shape = initMesh.position[k];
             float const noise = noise_perlin(1.5f * p_shape,10,0.4);
+            //stackoverflow.com/questions/10847007/using-the-gaussian-probability-density-function-in-c
+            float THE_DISTANCE = (pow((initMesh.position[k][0] - 0.0), 2) + pow((initMesh.position[k][1] - 0.0), 2));  // I must make this nicer later
+            float const gaussian = normal_pdf(THE_DISTANCE, 0.0, 0.3)*0.8;
 
-            p_shape += noise * 0.05 * translation_normal;
+            p_shape += (gaussian + noise) * 0.05 * translation_normal;
             initMesh.color[k][0] = (p_shape.z - 0.25) * 10.0;
     }
 
@@ -72,4 +75,13 @@ mesh initialize_mesh()
         p *= 0.5f;
     return shape;
 }
+
+///Utility
+float normal_pdf(float x, float m, float s) {
+    static const float inv_sqrt_2pi = 0.3989422804014327;
+    float a = (x - m) / s;
+
+    return inv_sqrt_2pi / s * std::exp(-0.5f * a * a);
+};
+
 
