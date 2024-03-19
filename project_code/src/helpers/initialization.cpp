@@ -1,6 +1,14 @@
 
 #include "initialization.hpp"
 #include "../environment.hpp"
+//#include "../erosion/stream_tree.hpp"
+
+#include "datastructure/gridTools.hpp"
+
+#include "erosion/flood_fill.hpp"
+
+//do not use add file???
+
 #include <Eigen/Dense>
 #include <Eigen/Sparse>
 #include <cotmatrix.h>
@@ -8,7 +16,11 @@
 
 
 
+
+
+
 using namespace cgp;
+//using namespace StreamTree;
 
 mesh initialize_plane()
 {
@@ -44,6 +56,31 @@ mesh initialize_plane()
             p_shape += (gaussian + noise) * 0.05 * translation_normal;
             initMesh.color[k][0] = (p_shape.z - 0.25) * 10.0;
     }
+
+    
+    //initMesh.color[k][0] = (p_shape.z - 0.25) * 10.0;
+    int2 colorTextCoord = int2(5,5);
+    //int2 colorTestCoord = getCoord(index, N);
+    int colorIndex = getIndex(colorTextCoord[0], colorTextCoord[1],N);
+    initMesh.color[colorIndex][1] = 100;
+
+    //Visualizing the Stream Trees
+
+    cgp::grid_2D<int> is_sea = floodFill::getfloodBool(initMesh,12);
+    for (int i = 0; i < N; i++) {
+        for (int j = 0; j < N; j++) {
+            if (is_sea(i, j) == 1){
+                int colorIndex = getIndex(i, j, N);
+                initMesh.color[colorIndex][0] = 0;
+                initMesh.color[colorIndex][1] = 0;
+                initMesh.color[colorIndex][2] = 100;
+            }
+
+        }
+    }
+    //is_sea.fill(0);
+
+    //cgp::grid_2D<cgp::int2> newBase = StreamTree::get_base_stream_tree(initMesh,is_sea);
 
     return initMesh;
     //////////////////END DIMITRI CODE

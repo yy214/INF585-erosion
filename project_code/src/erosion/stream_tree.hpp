@@ -20,7 +20,7 @@ bool lex_order(cgp::int2 const& a, cgp::int2 const& b){
 
 class lex_order_class{
 public:
-    bool operator()(cgp::int2 const& a, cgp::int2 const& b){
+    bool operator()(cgp::int2 const& a, cgp::int2 const& b) const {
         return lex_order(a,b);
     }
 };
@@ -40,7 +40,7 @@ namespace StreamTree{
 
     class lake_edge_comp{
     public:
-        bool operator()(LakeEdge const& e1, LakeEdge const& e2){
+        bool operator()(LakeEdge const& e1, LakeEdge const& e2) const {
             if(e1.src == e2.src) return lex_order(e1.dest, e2.dest);
             return lex_order(e1.src, e2.src);
         }
@@ -53,7 +53,7 @@ namespace StreamTree{
 
     class lake_edge_height_comp{
     public:
-        bool operator()(LakeEdgeHeight const& e1, LakeEdgeHeight const& e2){
+        bool operator()(LakeEdgeHeight const& e1, LakeEdgeHeight const& e2) const {
             return e1.height > e2.height;
         }
     };
