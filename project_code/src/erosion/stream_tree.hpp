@@ -5,15 +5,15 @@
 #include <map>
 #include <algorithm>
 
-bool operator==(cgp::int2 const& a, cgp::int2 const& b){
+inline bool operator==(cgp::int2 const& a, cgp::int2 const& b){
     return a.x == b.x && a.y == b.y;
 }
 
-bool operator!=(cgp::int2 const& a, cgp::int2 const& b){
+inline bool operator!=(cgp::int2 const& a, cgp::int2 const& b){
     return !(a==b);
 }
 
-bool lex_order(cgp::int2 const& a, cgp::int2 const& b){
+inline bool lex_order(cgp::int2 const& a, cgp::int2 const& b){
     if(a.x == b.x) return a.y < b.y;
     return a.x < b.x;
 }
@@ -61,7 +61,7 @@ namespace StreamTree{
     const cgp::int2 NONE = {-1,-1};
     const cgp::int2 SEA = {-42,-42};
 
-    float get_height(cgp::mesh const& m, cgp::grid_2D<cgp::int2> const& stream_tree, cgp::int2 pos){
+    inline float get_height(cgp::mesh const& m, cgp::grid_2D<cgp::int2> const& stream_tree, cgp::int2 pos){
         return m.position(stream_tree.index_to_offset(pos.x, pos.y)).z;
     }
 

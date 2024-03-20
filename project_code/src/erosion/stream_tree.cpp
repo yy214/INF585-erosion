@@ -74,18 +74,6 @@ namespace StreamTree
         for(int i = 0; i < dim.x; i++){
             for(int j = 0; j < dim.y; j++){
                 topological_sort_aux(stream_tree, visited, sorted, cgp::int2(i,j));
-                // cgp::int2 curr_pos = cgp::int2(i,j);
-                // std::stack<cgp::int2> s;
-                // while(curr_pos != NONE && curr_pos != SEA && !visited(curr_pos)){
-                //     visited(curr_pos) = true;
-                //     s.push(curr_pos);
-                //     curr_pos = stream_tree(curr_pos);
-                // }
-                // while(!s.empty()){
-                //     cgp::int2 pos = s.top();
-                //     s.pop();
-                //     sorted.push_back(pos);
-                // }
             }
         }
         std::reverse(sorted.begin(), sorted.end());

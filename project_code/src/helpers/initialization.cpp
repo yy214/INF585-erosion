@@ -1,7 +1,7 @@
 
 #include "initialization.hpp"
 #include "../environment.hpp"
-//#include "../erosion/stream_tree.hpp"
+#include "../erosion/stream_tree.hpp"
 
 #include "datastructure/gridTools.hpp"
 
