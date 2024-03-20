@@ -180,7 +180,11 @@ void scene_structure::keyboard_event()
 			//deforming_shape.shape.position[v] = sumVertices / float(vertexCount);
 			deforming_shape.shape.position[v][2] = sumZ / float(vertexCount);
 			//deforming_shape.shape.position[v] -= translationVec;
+			
+			
+			///Changes the color dynamically
 			deforming_shape.shape.color[v][0] = (deforming_shape.shape.position[v][2] - 0.25) * 5.0;
+			/////deforming_shape.shape.color[v] = color
 		}
 
 		

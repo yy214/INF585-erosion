@@ -1,11 +1,12 @@
 
 #include "initialization.hpp"
 #include "../environment.hpp"
-//#include "../erosion/stream_tree.hpp"
+//#include "erosion/stream_tree.hpp"
 
 #include "datastructure/gridTools.hpp"
 
 #include "erosion/flood_fill.hpp"
+#include "helpers/colorInterp.hpp"
 
 //do not use add file???
 
@@ -20,6 +21,7 @@
 
 
 using namespace cgp;
+using namespace colorInterpolation;
 //using namespace StreamTree;
 
 mesh initialize_plane()
@@ -28,6 +30,7 @@ mesh initialize_plane()
     
     /////////////DIMITRI CODE
     cgp::mesh initMesh = mesh_primitive_grid({ -1,-1,0 }, { 1,-1,0 }, { 1,1,0 }, { -1,1,0 }, N, N);
+
 
     vec3 const translation_normal = vec3(0.0, 0.0, 10.0);
 
@@ -48,13 +51,19 @@ mesh initialize_plane()
     for (size_t k = 0; k < N*N; ++k)
     {
             vec3& p_shape = initMesh.position[k];
-            float const noise = noise_perlin(1.5f * p_shape,10,0.4);
+            float noise = noise_perlin(1.5f * p_shape,10,0.3,1.5);
+            
+
             //stackoverflow.com/questions/10847007/using-the-gaussian-probability-density-function-in-c
             float THE_DISTANCE = (pow((initMesh.position[k][0] - 0.0), 2) + pow((initMesh.position[k][1] - 0.0), 2));  // I must make this nicer later
+            //noise *= (1 - pow(THE_DISTANCE,0.2));
             float const gaussian = normal_pdf(THE_DISTANCE, 0.0, 0.3)*0.8;
 
-            p_shape += (gaussian + noise) * 0.05 * translation_normal;
-            initMesh.color[k][0] = (p_shape.z - 0.25) * 10.0;
+            p_shape += (gaussian + noise - 1.0) * 0.05 * translation_normal;
+            //initMesh.color[k][0] = (p_shape.z - 0.25) * 10.0;
+            initMesh.color[k] = getColor(p_shape[2]);
+
+
     }
 
     

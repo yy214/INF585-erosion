@@ -34,7 +34,7 @@ cgp::grid_2D<int> floodFill::getfloodBool(cgp::mesh const& m,int initialIndex)
 
 		visitedBool(currPoint[0], currPoint[1]) = 1;
 
-		if (m.position[currIndex][2] < 0.5) {
+		if (m.position[currIndex][2] < 0.0) {
 			floodBool(currPoint[0], currPoint[1]) = 1;
 		}
 		else {
