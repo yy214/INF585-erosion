@@ -150,7 +150,7 @@ namespace StreamTree
         std::priority_queue<LakeEdgeHeight, std::vector<LakeEdgeHeight>, lake_edge_height_comp> edges;
 
         seen.insert(SEA);
-        for(LakeEdgeHeight e : lake_graph[SEA]){
+        for(LakeEdgeHeight const& e : lake_graph[SEA]){
             edges.push(e);
         }
         
@@ -165,7 +165,7 @@ namespace StreamTree
             }
             stream_tree(e.edge.dest) = e.edge.src;
             seen.insert(e.edge.dest);
-            for(LakeEdgeHeight out_edge : lake_graph[e.edge.dest]){
+            for(LakeEdgeHeight const& out_edge : lake_graph[e.edge.dest]){
                 edges.push(out_edge);
             }
         }

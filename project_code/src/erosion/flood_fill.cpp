@@ -3,14 +3,14 @@
 
 #include <queue>
 
-cgp::grid_2D<int> floodFill::getfloodBool(cgp::mesh const& m,int initialIndex)
+cgp::grid_2D<short> floodFill::getfloodBool(cgp::mesh const& m,int initialIndex)
 {
 	int N = m.position.size();
 	int dim = std::sqrt(N);
 	int2 currPoint = getCoord(initialIndex, dim);
 
-	cgp::grid_2D<int> floodBool = cgp::grid_2D<int>(dim,dim);
-	cgp::grid_2D<int> visitedBool = cgp::grid_2D<int>(dim,dim);
+	cgp::grid_2D<short> floodBool = cgp::grid_2D<short>(dim,dim);
+	cgp::grid_2D<short> visitedBool = cgp::grid_2D<short>(dim,dim);
 
 	floodBool.fill(0);
 	visitedBool.fill(0);

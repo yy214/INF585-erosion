@@ -75,10 +75,7 @@ mesh initialize_plane()
 
     //Visualizing the Stream Trees
 
-    cgp::grid_2D<int> is_sea = floodFill::getfloodBool(initMesh,12);
-
-    cgp::grid_2D<bool> is_sea_bool = cgp::grid_2D<bool>(N, N);
-    is_sea_bool.fill(false);
+    cgp::grid_2D<short> is_sea = floodFill::getfloodBool(initMesh,12);
 
     for (int i = 0; i < N; i++) {
         for (int j = 0; j < N; j++) {
@@ -94,9 +91,7 @@ mesh initialize_plane()
     }
     //is_sea.fill(0);
 
-
-
-    cgp::grid_2D<cgp::int2> newBase = get_base_stream_tree(initMesh,is_sea_bool);
+    cgp::grid_2D<cgp::int2> newBase = get_base_stream_tree(initMesh, is_sea);
 
     return initMesh;
     //////////////////END DIMITRI CODE
