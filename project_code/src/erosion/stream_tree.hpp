@@ -20,7 +20,7 @@ inline bool lex_order(cgp::int2 const& a, cgp::int2 const& b){
 
 class lex_order_class{
 public:
-    bool operator()(cgp::int2 const& a, cgp::int2 const& b) const {
+    inline bool operator()(cgp::int2 const& a, cgp::int2 const& b) const {
         return lex_order(a,b);
     }
 };
@@ -40,7 +40,7 @@ namespace StreamTree{
 
     class lake_edge_comp{
     public:
-        bool operator()(LakeEdge const& e1, LakeEdge const& e2) const {
+        inline bool operator()(LakeEdge const& e1, LakeEdge const& e2) const {
             if(e1.src == e2.src) return lex_order(e1.dest, e2.dest);
             return lex_order(e1.src, e2.src);
         }
@@ -53,7 +53,7 @@ namespace StreamTree{
 
     class lake_edge_height_comp{
     public:
-        bool operator()(LakeEdgeHeight const& e1, LakeEdgeHeight const& e2) const {
+        inline bool operator()(LakeEdgeHeight const& e1, LakeEdgeHeight const& e2) const {
             return e1.height > e2.height;
         }
     };
@@ -65,7 +65,7 @@ namespace StreamTree{
         return m.position(stream_tree.index_to_offset(pos.x, pos.y)).z;
     }
 
-    cgp::grid_2D<cgp::int2> get_base_stream_tree(cgp::mesh const& m, cgp::grid_2D<bool> const& is_sea);
+    inline cgp::grid_2D<cgp::int2> get_base_stream_tree(cgp::mesh const& m, cgp::grid_2D<bool> const& is_sea);
 
     void topological_sort_aux(cgp::grid_2D<cgp::int2> const& stream_tree, cgp::grid_2D<bool>& visited, std::vector<cgp::int2> sorted,cgp::int2 curr_node);
     std::vector<cgp::int2> topological_sort(cgp::grid_2D<cgp::int2> const& stream_tree);
