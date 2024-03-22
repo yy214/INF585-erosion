@@ -1,8 +1,4 @@
-project_code/build/project_code.dir
-project_code/build/RelWithDebInfo
-project_code/build/x64
-project_code/build/CMakeCache.txt
-project_code/build/CMakeFiles
+project_code/build/
 *.sdf
 *.suo
 *.opensdf

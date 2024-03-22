@@ -42,8 +42,7 @@ void erosionScheme::applyErosionStep(cgp::mesh& m, cgp::grid_2D<cgp::int2> const
 
 	for (cgp::int2 v : sorted_vertices) {
 		std::cout << stream_tree(v);
-		if (stream_tree(v) == cgp::int2(-1,-1)) {
-			
+		if (stream_tree(v) == v) {
 			rootQueue.push(v);
 		}
 		

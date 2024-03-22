@@ -27,9 +27,8 @@ using namespace StreamTree;
 
 mesh initialize_plane()
 {
-	int const N = 100;
+	int const N = 6;
     
-    /////////////DIMITRI CODE
     cgp::mesh initMesh = mesh_primitive_grid({ -1,-1,0 }, { 1,-1,0 }, { 1,1,0 }, { -1,1,0 }, N, N);
 
 
@@ -69,22 +68,22 @@ mesh initialize_plane()
 
     
     //initMesh.color[k][0] = (p_shape.z - 0.25) * 10.0;
-    int2 colorTextCoord = int2(5,5);
+    //int2 colorTextCoord = int2(5,5);
     //int2 colorTestCoord = getCoord(index, N);
-    int colorIndex = getIndex(colorTextCoord[0], colorTextCoord[1],N);
-    initMesh.color[colorIndex][1] = 100;
+    //int colorIndex = getIndex(colorTextCoord[0], colorTextCoord[1],N);
+    //initMesh.color[colorIndex][1] = 100;
 
     //Visualizing the Stream Trees
 
-    cgp::grid_2D<short> is_sea = floodFill::getfloodBool(initMesh,12);
+    cgp::grid_2D<short> is_sea = floodFill::getfloodBool(initMesh,0);
 
     for (int i = 0; i < N; i++) {
         for (int j = 0; j < N; j++) {
             if (is_sea(i, j) == 1){
                 int colorIndex = getIndex(i, j, N);
-                initMesh.color[colorIndex][0] = 0;
-                initMesh.color[colorIndex][1] = 0;
-                initMesh.color[colorIndex][2] = 100;
+                initMesh.color[colorIndex][0] = 0.f;
+                initMesh.color[colorIndex][1] = 0.f;
+                initMesh.color[colorIndex][2] = 100.f;
                 //is_sea_bool(i,j) = true;
             }
 
@@ -149,7 +148,6 @@ mesh initialize_plane()
     }
 
     return initMesh;
-    //////////////////END DIMITRI CODE
 }
 mesh initialize_cylinder()
 {
