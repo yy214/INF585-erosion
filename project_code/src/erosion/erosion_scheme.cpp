@@ -11,8 +11,6 @@ using namespace cgp;
 
 void erosionScheme::setHeightMap(cgp::mesh m)
 {
-	
-
 	int total = m.position.size();
 	int N = std::sqrt(total);
 
@@ -24,9 +22,8 @@ void erosionScheme::setHeightMap(cgp::mesh m)
 	}
 }
 
-void erosionScheme::applyErosionStep(float step,cgp::mesh& m, cgp::grid_2D<cgp::int2> const& stream_tree, cgp::grid_2D<cgp::int2> lakeCenters, cgp::grid_2D<float> areaMap)
+void erosionScheme::applyErosionStep(float step,cgp::mesh& m, cgp::grid_2D<cgp::int2> const& stream_tree, cgp::grid_2D<cgp::int2> lakeCenters, cgp::grid_2D<float> areaMap, )
 {
-
 	int total = m.position.size();
 	int N = std::sqrt(total);
 	//int2 POS = int2(0,0);
@@ -34,9 +31,7 @@ void erosionScheme::applyErosionStep(float step,cgp::mesh& m, cgp::grid_2D<cgp::
 	int M = 0.5;
 
 	//for now this is constant
-	float u = 0.001;
-
-
+	float uplift = 0.001;
 
 	//the queue to search all the root nodes / lakes??
 	std::queue<int2> rootQueue;
@@ -48,37 +43,34 @@ void erosionScheme::applyErosionStep(float step,cgp::mesh& m, cgp::grid_2D<cgp::
 		int colorIndex = getIndex(v[0], v[1], N);
 		float newHeight = 0.0f;
 		cgp::vec3 posVi = m.position[colorIndex];
-		if (stream_tree(v) == cgp::int2(-42, -42)) {
-			//IT IS AN OUTFLOW
-			m.color[colorIndex] = vec3(100.0, 100.0, 100.0);
-			newHeight = posVi[2] + u;
-
-
-
-		}
-		else if (lakeCenters(v) == v) {
-
+		else if (stream_tree(v) == StreamTree::NONE) {
 			//it is a sea node
 			m.color[colorIndex] = vec3(100.0, 0.0, 0.0);
-			newHeight = posVi[2] + u;
-
-
+			newHeight = posVi[2] + uplift;
 		}
 		else {
-			//it is a non-root node
-			m.color[colorIndex] = vec3(0.0, 100.0, 0.0);
-			int2 reciever = stream_tree(v);
+			int2 receiver = stream_tree(v);
+			float receiver_height = heightMap(receiver);
+			if (receiver == StreamTree::SEA) {
+				//IT IS AN OUTFLOW
+				m.color[colorIndex] = vec3(100.0, 100.0, 100.0);
+				receiver_height = 0;
+			}
+			else {
+				//it is a non-root node
+				m.color[colorIndex] = vec3(0.0, 100.0, 0.0);
+			}
 
 			//float kAm = 
-			cgp::vec3 posVj = m.position[getIndex(reciever[0],reciever[1],N)];
+			cgp::vec3 posVj = m.position[getIndex(receiver[0],receiver[1],N)];
 
-			float piPJ = std::pow( (pow(posVi[0] - posVj[0],2) + pow(posVi[1] - posVj[1], 2)), 0.5);
+			float piPJ = std::sqrt(pow(posVi[0] - posVj[0],2) + pow(posVi[1] - posVj[1], 2));
 			float kAm = k * std::pow(areaMap(v[0], v[1]), M);
 
 			
 			//here we assume uplift is 0;
 
-			newHeight = (heightMap(v[0], v[1]) + step * (u + kAm * heightMap(reciever[0], reciever[1]))) /
+			newHeight = (heightMap(v[0], v[1]) + step * (uplift + kAm * receiver_height)) /
 				(1.0 + kAm * step / piPJ);
 
 			//heightMap(v[0], v[1]) = -1.0;
@@ -86,11 +78,7 @@ void erosionScheme::applyErosionStep(float step,cgp::mesh& m, cgp::grid_2D<cgp::
 			
 			//heightMap(v[0], v[1]) = 0.0;
 		}
-
 		heightMap(v[0], v[1]) = newHeight;
-
-		
-		
 
 	}
 
@@ -140,7 +128,7 @@ void erosionScheme::applyErosionStep(float step,cgp::mesh& m, cgp::grid_2D<cgp::
 	//	int colorIndex = getIndex(currPoint[0], currPoint[1], N);
 	//	m.color[colorIndex] = cgp::vec3(100.0, 0.0, 0.0);
 
-	//	////must check if the node)) a reciever or not
+	//	////must check if the node)) a receiver or not
 	//	//float piPJ = 1.0;
 	//	//float kAm = k * std::pow(areaMap(currPoint[0], currPoint[1]), M);
 	//	////here we assume uplift is 0;
