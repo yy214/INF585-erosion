@@ -112,7 +112,7 @@ namespace StreamTree
             if (stream_tree(v) == SEA) {
                 continue;
             }
-            if(stream_tree(v) == NONE){
+            else if(stream_tree(v) == NONE){
                 lake_centers(v) = v;
             }
             else{
@@ -197,7 +197,7 @@ namespace StreamTree
     cgp::grid_2D<float> get_drainage_area(cgp::grid_2D<cgp::int2> const& stream_tree){
         cgp::int2 dim = stream_tree.dimension;
         
-        float area = 1 / dim.x / dim.y; // otherwise make an "area" function or even store it somewhere
+        float area = 1.0 / dim.x / dim.y; // otherwise make an "area" function or even store it somewhere
         std::vector<cgp::int2> sorted_vertices = topological_sort(stream_tree);
 
         cgp::grid_2D<float> drainage_area;

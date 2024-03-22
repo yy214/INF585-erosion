@@ -80,12 +80,23 @@ mesh initialize_plane()
 
     for (int i = 0; i < N; i++) {
         for (int j = 0; j < N; j++) {
+            //vec3& p_shape = initMesh.position[colorIndex];
+            //p_shape[2] = 0.0f;
+            
+
+            //initMesh.position[colorIndex][2] = 0.0f;
             if (is_sea(i, j) == 1){
                 int colorIndex = getIndex(i, j, N);
                 initMesh.color[colorIndex][0] = 0;
                 initMesh.color[colorIndex][1] = 0;
                 initMesh.color[colorIndex][2] = 100;
                 //is_sea_bool(i,j) = true;
+                //initMesh.position[colorIndex][2] = 0.0f;
+            }
+
+            //if under sea level, forced to be 0
+            if (initMesh.position[colorIndex][2] < 0.0) {
+                initMesh.position[colorIndex][2] = 0.0;
             }
 
         }
@@ -113,7 +124,7 @@ mesh initialize_plane()
     erosionScheme myErosion = erosionScheme();
 
     std::cout << "beeeeeeeeeeeeeeeeeeesssssssssssssssst";
-    std::cout << newLakes;
+    std::cout << newDrainage;
     myErosion.setHeightMap(initMesh);
     std::cout << "teesssssssssssssssst";
     //std::cout << myErosion.heightMap;
@@ -122,7 +133,7 @@ mesh initialize_plane()
 
     
     
-    myErosion.applyErosionStep(initMesh, newStream, 100);
+    myErosion.applyErosionStep(initMesh, newStream, newLakes, 100);
     //std::abort();
     /*myErosion.applyErosionStep(initMesh, newStream, 100);
     myErosion.applyErosionStep(initMesh, newStream, 100);
@@ -132,7 +143,7 @@ mesh initialize_plane()
     //std::cout << myErosion.heightMap;
 
 
-
+    std::cout << newDrainage;
 
     for (int i = 0; i < N; i++) {
         for (int j = 0; j < N; j++) {
@@ -140,10 +151,10 @@ mesh initialize_plane()
             if (true) {
                 //std::cout << 'ha';
                 int colorIndex = getIndex(i, j, N);
-                initMesh.color[colorIndex][2] = newDrainage(i, j) / 100.0;
+                initMesh.color[colorIndex][2] = newDrainage(i, j) * 300.0;
 
                 //Erosion update
-                initMesh.position[colorIndex][2] = myErosion.heightMap(i, j) + 1.0;
+                //initMesh.position[colorIndex][2] = myErosion.heightMap(i, j) + 1.0;
             }
         }
     }

@@ -24,7 +24,7 @@ void erosionScheme::setHeightMap(cgp::mesh m)
 	}
 }
 
-void erosionScheme::applyErosionStep(cgp::mesh& m, cgp::grid_2D<cgp::int2> const& stream_tree,float step=10)
+void erosionScheme::applyErosionStep(cgp::mesh& m, cgp::grid_2D<cgp::int2> const& stream_tree, cgp::grid_2D<cgp::int2> lakeCenters,float step=10)
 {
 	int total = m.position.size();
 	int N = std::sqrt(total);
@@ -41,8 +41,16 @@ void erosionScheme::applyErosionStep(cgp::mesh& m, cgp::grid_2D<cgp::int2> const
 	std::cout << sorted_vertices.size();
 
 	for (cgp::int2 v : sorted_vertices) {
-		std::cout << stream_tree(v);
-		if (stream_tree(v) == cgp::int2(-1,-1)) {
+		
+
+		//std::cout << stream_tree(v);
+		//if (stream_tree(v) == cgp::int2(-1,-1)) {
+
+		if (v == lakeCenters(v) && lakeCenters(v) != cgp::int2(-42, -42)) {
+			std::cout << "ceeeeeeeeeeeeeeeeeeeeeenter";
+			std::cout << v;
+			std::cout << "notttttceeenter";
+			//std::abort();
 			
 			rootQueue.push(v);
 		}
