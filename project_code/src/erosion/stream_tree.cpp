@@ -49,16 +49,26 @@ namespace StreamTree
                 }
             }
         }
+        //std::cout << "tesssssssssssssssssssssssssssssssssssssssst";
+        //std::cout << stream_tree;
         return stream_tree;
     }
 
-    void topological_sort_aux(cgp::grid_2D<cgp::int2> const& stream_tree, cgp::grid_2D<short>& visited, std::vector<cgp::int2> sorted, cgp::int2 curr_node){
+    void topological_sort_aux(cgp::grid_2D<cgp::int2> const& stream_tree, cgp::grid_2D<short>& visited, std::vector<cgp::int2>& sorted, cgp::int2 curr_node){
         if(curr_node == NONE || curr_node == SEA) return;
         if(visited(curr_node)) return;
         visited(curr_node) = true;
+        //std::cout << "curr node";
+        //std::cout << curr_node;
 
-        topological_sort_aux(stream_tree, visited, sorted, stream_tree(curr_node)); //bc only 1 outwards edge
+        //std::cout << std::endl << "sorted size begin" << sorted.size() << std::endl;
         sorted.push_back(curr_node);
+        topological_sort_aux(stream_tree, visited, sorted, stream_tree(curr_node)); //bc only 1 outwards edge
+        
+        
+
+        //std::cout << std::endl <<  "sorted size end" << sorted.size() << std::endl;
+
     }
 
     std::vector<cgp::int2> topological_sort(cgp::grid_2D<cgp::int2> const& stream_tree){
@@ -74,9 +84,16 @@ namespace StreamTree
         for(int i = 0; i < dim.x; i++){
             for(int j = 0; j < dim.y; j++){
                 topological_sort_aux(stream_tree, visited, sorted, cgp::int2(i,j));
+                //std::cout << "sorted";
             }
         }
+        //std::cout << "sort comparison";
+        //std::cout << sorted.size();
         std::reverse(sorted.begin(), sorted.end());
+        //std::cout << sorted.size();
+
+        
+        //std::abort();
 
         return sorted;
     }
@@ -91,6 +108,10 @@ namespace StreamTree
         std::reverse(sorted_vertices.begin(), sorted_vertices.end());
 
         for(cgp::int2 v : sorted_vertices){
+            
+            if (stream_tree(v) == SEA) {
+                continue;
+            }
             if(stream_tree(v) == NONE){
                 lake_centers(v) = v;
             }
@@ -99,6 +120,7 @@ namespace StreamTree
                 lake_centers(v) = lake_centers(stream_tree(v)); //works bc of topological sort
             }
         }
+        //std::abort();
 
         return lake_centers;
     }
@@ -113,7 +135,7 @@ namespace StreamTree
             for(int j = 0; j < dim.y; j++){
                 cgp::int2 curr_pos = cgp::int2(i,j);
                 cgp::int2 next_pos = stream_tree(curr_pos);
-                if(next_pos == NONE) continue;
+                if (next_pos == NONE || next_pos == SEA) continue;
 
                 cgp::int2 lake_a = lakes(curr_pos), lake_b = lakes(next_pos);
                 if(lakes(curr_pos) == lakes(next_pos)) continue;
@@ -183,8 +205,14 @@ namespace StreamTree
         drainage_area.resize(dim);
         drainage_area.fill(0.f);
 
+        //std::abort();
+
         for(cgp::int2 v : sorted_vertices){
+            //std::cout << "veeeertices";
+            //std::cout << v;
             drainage_area(v) += area;
+            //std::cout << stream_tree(v);
+            if (stream_tree(v) == NONE || stream_tree(v) == SEA) { continue; }
             drainage_area(stream_tree(v)) += drainage_area(v);
         }
 

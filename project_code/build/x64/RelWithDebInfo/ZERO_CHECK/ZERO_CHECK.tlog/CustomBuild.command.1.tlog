@@ -1,6 +1,6 @@
-^D:\COURS\X 3A\P2\INF585_LAB_CODE\INF585-EROSION\PROJECT_CODE\BUILD\CMAKEFILES\83BAB8690EF39B6C420B91C2377D98D3\GENERATE.STAMP.RULE
+^C:\USERS\DIMITRI\DOCUMENTS\INF585\NEWESTCODE\INF585_LAB_CODE\INF585-EROSION\PROJECT_CODE\BUILD\CMAKEFILES\99C0CEEA426D132E78ED3D03A0DAE2E3\GENERATE.STAMP.RULE
 setlocal
-"C:\Program Files\CMake\bin\cmake.exe" "-SD:/cours/X 3A/P2/inf585_lab_code/INF585-erosion/project_code" "-BD:/cours/X 3A/P2/inf585_lab_code/INF585-erosion/project_code/build" --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file "D:/cours/X 3A/P2/inf585_lab_code/INF585-erosion/project_code/build/project_code.sln"
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/Dimitri/Documents/INF585/newestCode/inf585_lab_code/INF585-erosion/project_code -BC:/Users/Dimitri/Documents/INF585/newestCode/inf585_lab_code/INF585-erosion/project_code/build --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file C:/Users/Dimitri/Documents/INF585/newestCode/inf585_lab_code/INF585-erosion/project_code/build/project_code.sln
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone

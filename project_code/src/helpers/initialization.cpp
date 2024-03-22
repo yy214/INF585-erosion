@@ -2,6 +2,7 @@
 #include "initialization.hpp"
 #include "../environment.hpp"
 #include "../erosion/stream_tree.hpp"
+#include "../erosion/erosion_scheme.hpp"
 
 #include "datastructure/gridTools.hpp"
 
@@ -61,7 +62,7 @@ mesh initialize_plane()
 
             p_shape += (gaussian + noise - 1.0) * 0.05 * translation_normal;
             //initMesh.color[k][0] = (p_shape.z - 0.25) * 10.0;
-            initMesh.color[k] = getColor(p_shape[2]);
+            //initMesh.color[k] = getColor(p_shape[2]);
 
 
     }
@@ -91,7 +92,61 @@ mesh initialize_plane()
     }
     //is_sea.fill(0);
 
-    cgp::grid_2D<cgp::int2> newBase = get_base_stream_tree(initMesh, is_sea);
+    cgp::grid_2D<cgp::int2> newStream = get_base_stream_tree(initMesh, is_sea);
+    std::cout << "builing lakesssssssssss";
+    cgp::grid_2D<cgp::int2> newLakes = get_lakes(newStream);
+    std::cout << newLakes;
+    std::cout << "llllllllaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
+    
+
+    std::map<cgp::int2, std::vector<LakeEdgeHeight>, lex_order_class> newLakeGraph = get_lake_graph(initMesh,newStream,newLakes);
+    get_final_stream_tree_from_lake_graph(newStream,newLakeGraph);
+ 
+    cgp::grid_2D<float> newDrainage = get_drainage_area(newStream);
+    //std::abort();
+    //std::cout << newStream;
+
+
+
+
+    //Erosion stuff
+    erosionScheme myErosion = erosionScheme();
+
+    std::cout << "beeeeeeeeeeeeeeeeeeesssssssssssssssst";
+    std::cout << newLakes;
+    myErosion.setHeightMap(initMesh);
+    std::cout << "teesssssssssssssssst";
+    //std::cout << myErosion.heightMap;
+    //std::cout << newLakeGraph.;
+    //std::cout << newDrainage;
+
+    
+    
+    myErosion.applyErosionStep(initMesh, newStream, 100);
+    //std::abort();
+    /*myErosion.applyErosionStep(initMesh, newStream, 100);
+    myErosion.applyErosionStep(initMesh, newStream, 100);
+    myErosion.applyErosionStep(initMesh, newStream, 100);
+    myErosion.applyErosionStep(initMesh, newStream, 100);*/
+
+    //std::cout << myErosion.heightMap;
+
+
+
+
+    for (int i = 0; i < N; i++) {
+        for (int j = 0; j < N; j++) {
+            //std::cout << newLakes(i, j) << std::endl;
+            if (true) {
+                //std::cout << 'ha';
+                int colorIndex = getIndex(i, j, N);
+                initMesh.color[colorIndex][2] = newDrainage(i, j) / 100.0;
+
+                //Erosion update
+                initMesh.position[colorIndex][2] = myErosion.heightMap(i, j) + 1.0;
+            }
+        }
+    }
 
     return initMesh;
     //////////////////END DIMITRI CODE

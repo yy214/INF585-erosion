@@ -67,7 +67,7 @@ namespace StreamTree{
 
     cgp::grid_2D<cgp::int2> get_base_stream_tree(cgp::mesh const& m, cgp::grid_2D<short> const& is_sea);
 
-    void topological_sort_aux(cgp::grid_2D<cgp::int2> const& stream_tree, cgp::grid_2D<short>& visited, std::vector<cgp::int2> sorted,cgp::int2 curr_node);
+    void topological_sort_aux(cgp::grid_2D<cgp::int2> const& stream_tree, cgp::grid_2D<short>& visited, std::vector<cgp::int2>& sorted,cgp::int2 curr_node);
     std::vector<cgp::int2> topological_sort(cgp::grid_2D<cgp::int2> const& stream_tree);
 
     cgp::grid_2D<cgp::int2> get_lakes(cgp::grid_2D<cgp::int2> const& stream_tree);

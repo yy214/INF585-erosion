@@ -86,9 +86,9 @@ cgp::grid_2D<short> floodFill::getfloodBool(cgp::mesh const& m,int initialIndex)
 	//visitedBool[{currIndex}] = true;
 	//visitedBool(4,4) = 3;
 
-	std::cout << visitedBool;
-	std::cout << "got here";
-	std::cout << floodBool;
+	//std::cout << visitedBool;
+	//std::cout << "got here";
+	//std::cout << floodBool;
 
 	//m.color[0][0] = 0;
 
