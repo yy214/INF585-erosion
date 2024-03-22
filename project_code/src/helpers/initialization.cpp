@@ -115,10 +115,15 @@ mesh initialize_plane()
     //Erosion stuff
     erosionScheme myErosion = erosionScheme();
 
+<<<<<<< HEAD
     std::cout << "beeeeeeeeeeeeeeeeeeesssssssssssssssst";
     //std::cout << newDrainage;
+=======
+    //std::cout << "beeeeeeeeeeeeeeeeeeesssssssssssssssst";
+    //std::cout << newLakes;
+>>>>>>> michael_branch
     myErosion.setHeightMap(initMesh);
-    std::cout << "teesssssssssssssssst";
+    //std::cout << "teesssssssssssssssst";
     //std::cout << myErosion.heightMap;
     //std::cout << newLakeGraph.;
     //std::cout << newDrainage;
