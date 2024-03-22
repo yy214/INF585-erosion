@@ -89,7 +89,6 @@ void scene_structure::display_frame()
 	if (gui.display_wireframe)
 		draw_wireframe(deforming_shape.visual, environment, { 0,0,0 });
 
-	CONTINUE HERE
 
 	deforming_shape.visual.vbo_position.update(deforming_shape.shape.position);
 	deforming_shape.visual.vbo_color.update(deforming_shape.shape.color);
