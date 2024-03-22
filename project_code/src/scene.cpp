@@ -89,6 +89,11 @@ void scene_structure::display_frame()
 	if (gui.display_wireframe)
 		draw_wireframe(deforming_shape.visual, environment, { 0,0,0 });
 
+	CONTINUE HERE
+
+	deforming_shape.visual.vbo_position.update(deforming_shape.shape.position);
+	deforming_shape.visual.vbo_color.update(deforming_shape.shape.color);
+
 	// Periodically update the normal
 	//  Doesn't do it all the time as the computation is costly
 	timer_update_normal.update();
@@ -98,7 +103,6 @@ void scene_structure::display_frame()
 	// Display of the circle of influence oriented along the local normal of the surface
 	if (picking.active)
 		picking_visual.draw(environment, deforming_shape.shape.position[picking.index], picking.normal, gui.deformer_parameters.falloff);
-
 }
 
 
@@ -198,9 +202,10 @@ void scene_structure::keyboard_event()
 		deforming_shape.visual.vbo_position.update(deforming_shape.shape.position);
 		deforming_shape.require_normal_update = true;
 
-		deforming_shape.shape.normal_update();
+		// included in update_normal()
+		//deforming_shape.shape.normal_update(); 
+		//deforming_shape.visual.vbo_normal.update(deforming_shape.shape.normal);
 
-		deforming_shape.visual.vbo_normal.update(deforming_shape.shape.normal);
 		deforming_shape.visual.vbo_color.update(deforming_shape.shape.color);
 	}
 }

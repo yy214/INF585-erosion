@@ -92,10 +92,10 @@ mesh initialize_plane()
     //is_sea.fill(0);
 
     cgp::grid_2D<cgp::int2> newStream = get_base_stream_tree(initMesh, is_sea);
-    std::cout << "builing lakesssssssssss";
+    //std::cout << "builing lakesssssssssss";
     cgp::grid_2D<cgp::int2> newLakes = get_lakes(newStream);
-    std::cout << newLakes;
-    std::cout << "llllllllaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
+    //std::cout << newLakes;
+    //std::cout << "llllllllaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
     
 
     std::map<cgp::int2, std::vector<LakeEdgeHeight>, lex_order_class> newLakeGraph = get_lake_graph(initMesh,newStream,newLakes);
@@ -111,10 +111,10 @@ mesh initialize_plane()
     //Erosion stuff
     erosionScheme myErosion = erosionScheme();
 
-    std::cout << "beeeeeeeeeeeeeeeeeeesssssssssssssssst";
-    std::cout << newLakes;
+    //std::cout << "beeeeeeeeeeeeeeeeeeesssssssssssssssst";
+    //std::cout << newLakes;
     myErosion.setHeightMap(initMesh);
-    std::cout << "teesssssssssssssssst";
+    //std::cout << "teesssssssssssssssst";
     //std::cout << myErosion.heightMap;
     //std::cout << newLakeGraph.;
     //std::cout << newDrainage;
