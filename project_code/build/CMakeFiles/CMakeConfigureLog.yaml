@@ -24,7 +24,7 @@ events:
       The output was:
       0
       MSBuild version 17.7.2+d6990bcfa for .NET Framework
-      Build started 21/03/2024 13:13:18.
+      Build started 22/03/2024 17:03:04.
       
       Project "C:\\Users\\Dimitri\\Documents\\INF585\\newestCode\\inf585_lab_code\\INF585-erosion\\project_code\\build\\CMakeFiles\\3.27.5\\CompilerIdC\\CompilerIdC.vcxproj" on node 1 (default targets).
       PrepareForBuild:
@@ -52,7 +52,7 @@ events:
           0 Warning(s)
           0 Error(s)
       
-      Time Elapsed 00:00:00.78
+      Time Elapsed 00:00:00.72
       
       
       Compilation of the C compiler identification source "CMakeCCompilerId.c" produced "CompilerIdC.exe"
@@ -78,7 +78,7 @@ events:
       The output was:
       0
       MSBuild version 17.7.2+d6990bcfa for .NET Framework
-      Build started 21/03/2024 13:13:19.
+      Build started 22/03/2024 17:03:05.
       
       Project "C:\\Users\\Dimitri\\Documents\\INF585\\newestCode\\inf585_lab_code\\INF585-erosion\\project_code\\build\\CMakeFiles\\3.27.5\\CompilerIdCXX\\CompilerIdCXX.vcxproj" on node 1 (default targets).
       PrepareForBuild:
@@ -106,7 +106,7 @@ events:
           0 Warning(s)
           0 Error(s)
       
-      Time Elapsed 00:00:00.50
+      Time Elapsed 00:00:00.57
       
       
       Compilation of the CXX compiler identification source "CMakeCXXCompilerId.cpp" produced "CompilerIdCXX.exe"
@@ -125,8 +125,8 @@ events:
     checks:
       - "Detecting C compiler ABI info"
     directories:
-      source: "C:/Users/Dimitri/Documents/INF585/newestCode/inf585_lab_code/INF585-erosion/project_code/build/CMakeFiles/CMakeScratch/TryCompile-0b4ruz"
-      binary: "C:/Users/Dimitri/Documents/INF585/newestCode/inf585_lab_code/INF585-erosion/project_code/build/CMakeFiles/CMakeScratch/TryCompile-0b4ruz"
+      source: "C:/Users/Dimitri/Documents/INF585/newestCode/inf585_lab_code/INF585-erosion/project_code/build/CMakeFiles/CMakeScratch/TryCompile-a4hq1l"
+      binary: "C:/Users/Dimitri/Documents/INF585/newestCode/inf585_lab_code/INF585-erosion/project_code/build/CMakeFiles/CMakeScratch/TryCompile-a4hq1l"
     cmakeVariables:
       CMAKE_C_FLAGS: "/DWIN32 /D_WINDOWS /W3"
       CMAKE_C_FLAGS_DEBUG: "/MDd /Zi /Ob0 /Od /RTC1"
@@ -135,39 +135,39 @@ events:
       variable: "CMAKE_C_ABI_COMPILED"
       cached: true
       stdout: |
-        Change Dir: 'C:/Users/Dimitri/Documents/INF585/newestCode/inf585_lab_code/INF585-erosion/project_code/build/CMakeFiles/CMakeScratch/TryCompile-0b4ruz'
+        Change Dir: 'C:/Users/Dimitri/Documents/INF585/newestCode/inf585_lab_code/INF585-erosion/project_code/build/CMakeFiles/CMakeScratch/TryCompile-a4hq1l'
         
-        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/2022/Community/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_d8946.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:n
+        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/2022/Community/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_e968e.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:n
         MSBuild version 17.7.2+d6990bcfa for .NET Framework
-        Build started 21/03/2024 13:13:20.
+        Build started 22/03/2024 17:03:06.
         
-        Project "C:\\Users\\Dimitri\\Documents\\INF585\\newestCode\\inf585_lab_code\\INF585-erosion\\project_code\\build\\CMakeFiles\\CMakeScratch\\TryCompile-0b4ruz\\cmTC_d8946.vcxproj" on node 1 (default targets).
+        Project "C:\\Users\\Dimitri\\Documents\\INF585\\newestCode\\inf585_lab_code\\INF585-erosion\\project_code\\build\\CMakeFiles\\CMakeScratch\\TryCompile-a4hq1l\\cmTC_e968e.vcxproj" on node 1 (default targets).
         PrepareForBuild:
-          Creating directory "cmTC_d8946.dir\\Debug\\".
-          Creating directory "C:\\Users\\Dimitri\\Documents\\INF585\\newestCode\\inf585_lab_code\\INF585-erosion\\project_code\\build\\CMakeFiles\\CMakeScratch\\TryCompile-0b4ruz\\Debug\\".
-          Creating directory "cmTC_d8946.dir\\Debug\\cmTC_d8946.tlog\\".
+          Creating directory "cmTC_e968e.dir\\Debug\\".
+          Creating directory "C:\\Users\\Dimitri\\Documents\\INF585\\newestCode\\inf585_lab_code\\INF585-erosion\\project_code\\build\\CMakeFiles\\CMakeScratch\\TryCompile-a4hq1l\\Debug\\".
+          Creating directory "cmTC_e968e.dir\\Debug\\cmTC_e968e.tlog\\".
         InitializeBuildStatus:
-          Creating "cmTC_d8946.dir\\Debug\\cmTC_d8946.tlog\\unsuccessfulbuild" because "AlwaysCreate" was specified.
-          Touching "cmTC_d8946.dir\\Debug\\cmTC_d8946.tlog\\unsuccessfulbuild".
+          Creating "cmTC_e968e.dir\\Debug\\cmTC_e968e.tlog\\unsuccessfulbuild" because "AlwaysCreate" was specified.
+          Touching "cmTC_e968e.dir\\Debug\\cmTC_e968e.tlog\\unsuccessfulbuild".
         ClCompile:
-          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.37.32822\\bin\\HostX64\\x64\\CL.exe /c /Zi /W3 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\\"Debug\\"" /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_d8946.dir\\Debug\\\\" /Fd"cmTC_d8946.dir\\Debug\\vc143.pdb" /external:W3 /Gd /TC /errorReport:queue "C:\\Program Files\\CMake\\share\\cmake-3.27\\Modules\\CMakeCCompilerABI.c"
+          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.37.32822\\bin\\HostX64\\x64\\CL.exe /c /Zi /W3 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\\"Debug\\"" /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_e968e.dir\\Debug\\\\" /Fd"cmTC_e968e.dir\\Debug\\vc143.pdb" /external:W3 /Gd /TC /errorReport:queue "C:\\Program Files\\CMake\\share\\cmake-3.27\\Modules\\CMakeCCompilerABI.c"
           Microsoft (R) C/C++ Optimizing Compiler Version 19.37.32824 for x64
-          CMakeCCompilerABI.c
           Copyright (C) Microsoft Corporation.  All rights reserved.
-          cl /c /Zi /W3 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\\"Debug\\"" /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_d8946.dir\\Debug\\\\" /Fd"cmTC_d8946.dir\\Debug\\vc143.pdb" /external:W3 /Gd /TC /errorReport:queue "C:\\Program Files\\CMake\\share\\cmake-3.27\\Modules\\CMakeCCompilerABI.c"
+          CMakeCCompilerABI.c
+          cl /c /Zi /W3 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\\"Debug\\"" /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_e968e.dir\\Debug\\\\" /Fd"cmTC_e968e.dir\\Debug\\vc143.pdb" /external:W3 /Gd /TC /errorReport:queue "C:\\Program Files\\CMake\\share\\cmake-3.27\\Modules\\CMakeCCompilerABI.c"
         Link:
-          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.37.32822\\bin\\HostX64\\x64\\link.exe /ERRORREPORT:QUEUE /OUT:"C:\\Users\\Dimitri\\Documents\\INF585\\newestCode\\inf585_lab_code\\INF585-erosion\\project_code\\build\\CMakeFiles\\CMakeScratch\\TryCompile-0b4ruz\\Debug\\cmTC_d8946.exe" /INCREMENTAL /ILK:"cmTC_d8946.dir\\Debug\\cmTC_d8946.ilk" /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:/Users/Dimitri/Documents/INF585/newestCode/inf585_lab_code/INF585-erosion/project_code/build/CMakeFiles/CMakeScratch/TryCompile-0b4ruz/Debug/cmTC_d8946.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:/Users/Dimitri/Documents/INF585/newestCode/inf585_lab_code/INF585-erosion/project_code/build/CMakeFiles/CMakeScratch/TryCompile-0b4ruz/Debug/cmTC_d8946.lib" /MACHINE:X64  /machine:x64 cmTC_d8946.dir\\Debug\\CMakeCCompilerABI.obj
-          cmTC_d8946.vcxproj -> C:\\Users\\Dimitri\\Documents\\INF585\\newestCode\\inf585_lab_code\\INF585-erosion\\project_code\\build\\CMakeFiles\\CMakeScratch\\TryCompile-0b4ruz\\Debug\\cmTC_d8946.exe
+          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.37.32822\\bin\\HostX64\\x64\\link.exe /ERRORREPORT:QUEUE /OUT:"C:\\Users\\Dimitri\\Documents\\INF585\\newestCode\\inf585_lab_code\\INF585-erosion\\project_code\\build\\CMakeFiles\\CMakeScratch\\TryCompile-a4hq1l\\Debug\\cmTC_e968e.exe" /INCREMENTAL /ILK:"cmTC_e968e.dir\\Debug\\cmTC_e968e.ilk" /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:/Users/Dimitri/Documents/INF585/newestCode/inf585_lab_code/INF585-erosion/project_code/build/CMakeFiles/CMakeScratch/TryCompile-a4hq1l/Debug/cmTC_e968e.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:/Users/Dimitri/Documents/INF585/newestCode/inf585_lab_code/INF585-erosion/project_code/build/CMakeFiles/CMakeScratch/TryCompile-a4hq1l/Debug/cmTC_e968e.lib" /MACHINE:X64  /machine:x64 cmTC_e968e.dir\\Debug\\CMakeCCompilerABI.obj
+          cmTC_e968e.vcxproj -> C:\\Users\\Dimitri\\Documents\\INF585\\newestCode\\inf585_lab_code\\INF585-erosion\\project_code\\build\\CMakeFiles\\CMakeScratch\\TryCompile-a4hq1l\\Debug\\cmTC_e968e.exe
         FinalizeBuildStatus:
-          Deleting file "cmTC_d8946.dir\\Debug\\cmTC_d8946.tlog\\unsuccessfulbuild".
-          Touching "cmTC_d8946.dir\\Debug\\cmTC_d8946.tlog\\cmTC_d8946.lastbuildstate".
-        Done Building Project "C:\\Users\\Dimitri\\Documents\\INF585\\newestCode\\inf585_lab_code\\INF585-erosion\\project_code\\build\\CMakeFiles\\CMakeScratch\\TryCompile-0b4ruz\\cmTC_d8946.vcxproj" (default targets).
+          Deleting file "cmTC_e968e.dir\\Debug\\cmTC_e968e.tlog\\unsuccessfulbuild".
+          Touching "cmTC_e968e.dir\\Debug\\cmTC_e968e.tlog\\cmTC_e968e.lastbuildstate".
+        Done Building Project "C:\\Users\\Dimitri\\Documents\\INF585\\newestCode\\inf585_lab_code\\INF585-erosion\\project_code\\build\\CMakeFiles\\CMakeScratch\\TryCompile-a4hq1l\\cmTC_e968e.vcxproj" (default targets).
         
         Build succeeded.
             0 Warning(s)
             0 Error(s)
         
-        Time Elapsed 00:00:00.47
+        Time Elapsed 00:00:00.52
         
       exitCode: 0
   -
@@ -179,8 +179,8 @@ events:
     checks:
       - "Detecting CXX compiler ABI info"
     directories:
-      source: "C:/Users/Dimitri/Documents/INF585/newestCode/inf585_lab_code/INF585-erosion/project_code/build/CMakeFiles/CMakeScratch/TryCompile-rspx5w"
-      binary: "C:/Users/Dimitri/Documents/INF585/newestCode/inf585_lab_code/INF585-erosion/project_code/build/CMakeFiles/CMakeScratch/TryCompile-rspx5w"
+      source: "C:/Users/Dimitri/Documents/INF585/newestCode/inf585_lab_code/INF585-erosion/project_code/build/CMakeFiles/CMakeScratch/TryCompile-m7504w"
+      binary: "C:/Users/Dimitri/Documents/INF585/newestCode/inf585_lab_code/INF585-erosion/project_code/build/CMakeFiles/CMakeScratch/TryCompile-m7504w"
     cmakeVariables:
       CMAKE_CXX_FLAGS: "/DWIN32 /D_WINDOWS /W3 /GR /EHsc"
       CMAKE_CXX_FLAGS_DEBUG: "/MDd /Zi /Ob0 /Od /RTC1"
@@ -189,33 +189,33 @@ events:
       variable: "CMAKE_CXX_ABI_COMPILED"
       cached: true
       stdout: |
-        Change Dir: 'C:/Users/Dimitri/Documents/INF585/newestCode/inf585_lab_code/INF585-erosion/project_code/build/CMakeFiles/CMakeScratch/TryCompile-rspx5w'
+        Change Dir: 'C:/Users/Dimitri/Documents/INF585/newestCode/inf585_lab_code/INF585-erosion/project_code/build/CMakeFiles/CMakeScratch/TryCompile-m7504w'
         
-        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/2022/Community/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_463ab.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:n
+        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/2022/Community/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_75131.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:n
         MSBuild version 17.7.2+d6990bcfa for .NET Framework
-        Build started 21/03/2024 13:13:20.
+        Build started 22/03/2024 17:03:07.
         
-        Project "C:\\Users\\Dimitri\\Documents\\INF585\\newestCode\\inf585_lab_code\\INF585-erosion\\project_code\\build\\CMakeFiles\\CMakeScratch\\TryCompile-rspx5w\\cmTC_463ab.vcxproj" on node 1 (default targets).
+        Project "C:\\Users\\Dimitri\\Documents\\INF585\\newestCode\\inf585_lab_code\\INF585-erosion\\project_code\\build\\CMakeFiles\\CMakeScratch\\TryCompile-m7504w\\cmTC_75131.vcxproj" on node 1 (default targets).
         PrepareForBuild:
-          Creating directory "cmTC_463ab.dir\\Debug\\".
-          Creating directory "C:\\Users\\Dimitri\\Documents\\INF585\\newestCode\\inf585_lab_code\\INF585-erosion\\project_code\\build\\CMakeFiles\\CMakeScratch\\TryCompile-rspx5w\\Debug\\".
-          Creating directory "cmTC_463ab.dir\\Debug\\cmTC_463ab.tlog\\".
+          Creating directory "cmTC_75131.dir\\Debug\\".
+          Creating directory "C:\\Users\\Dimitri\\Documents\\INF585\\newestCode\\inf585_lab_code\\INF585-erosion\\project_code\\build\\CMakeFiles\\CMakeScratch\\TryCompile-m7504w\\Debug\\".
+          Creating directory "cmTC_75131.dir\\Debug\\cmTC_75131.tlog\\".
         InitializeBuildStatus:
-          Creating "cmTC_463ab.dir\\Debug\\cmTC_463ab.tlog\\unsuccessfulbuild" because "AlwaysCreate" was specified.
-          Touching "cmTC_463ab.dir\\Debug\\cmTC_463ab.tlog\\unsuccessfulbuild".
+          Creating "cmTC_75131.dir\\Debug\\cmTC_75131.tlog\\unsuccessfulbuild" because "AlwaysCreate" was specified.
+          Touching "cmTC_75131.dir\\Debug\\cmTC_75131.tlog\\unsuccessfulbuild".
         ClCompile:
-          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.37.32822\\bin\\HostX64\\x64\\CL.exe /c /Zi /W3 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\\"Debug\\"" /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /GR /Fo"cmTC_463ab.dir\\Debug\\\\" /Fd"cmTC_463ab.dir\\Debug\\vc143.pdb" /external:W3 /Gd /TP /errorReport:queue "C:\\Program Files\\CMake\\share\\cmake-3.27\\Modules\\CMakeCXXCompilerABI.cpp"
+          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.37.32822\\bin\\HostX64\\x64\\CL.exe /c /Zi /W3 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\\"Debug\\"" /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /GR /Fo"cmTC_75131.dir\\Debug\\\\" /Fd"cmTC_75131.dir\\Debug\\vc143.pdb" /external:W3 /Gd /TP /errorReport:queue "C:\\Program Files\\CMake\\share\\cmake-3.27\\Modules\\CMakeCXXCompilerABI.cpp"
           Microsoft (R) C/C++ Optimizing Compiler Version 19.37.32824 for x64
           CMakeCXXCompilerABI.cpp
           Copyright (C) Microsoft Corporation.  All rights reserved.
-          cl /c /Zi /W3 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\\"Debug\\"" /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /GR /Fo"cmTC_463ab.dir\\Debug\\\\" /Fd"cmTC_463ab.dir\\Debug\\vc143.pdb" /external:W3 /Gd /TP /errorReport:queue "C:\\Program Files\\CMake\\share\\cmake-3.27\\Modules\\CMakeCXXCompilerABI.cpp"
+          cl /c /Zi /W3 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\\"Debug\\"" /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /GR /Fo"cmTC_75131.dir\\Debug\\\\" /Fd"cmTC_75131.dir\\Debug\\vc143.pdb" /external:W3 /Gd /TP /errorReport:queue "C:\\Program Files\\CMake\\share\\cmake-3.27\\Modules\\CMakeCXXCompilerABI.cpp"
         Link:
-          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.37.32822\\bin\\HostX64\\x64\\link.exe /ERRORREPORT:QUEUE /OUT:"C:\\Users\\Dimitri\\Documents\\INF585\\newestCode\\inf585_lab_code\\INF585-erosion\\project_code\\build\\CMakeFiles\\CMakeScratch\\TryCompile-rspx5w\\Debug\\cmTC_463ab.exe" /INCREMENTAL /ILK:"cmTC_463ab.dir\\Debug\\cmTC_463ab.ilk" /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:/Users/Dimitri/Documents/INF585/newestCode/inf585_lab_code/INF585-erosion/project_code/build/CMakeFiles/CMakeScratch/TryCompile-rspx5w/Debug/cmTC_463ab.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:/Users/Dimitri/Documents/INF585/newestCode/inf585_lab_code/INF585-erosion/project_code/build/CMakeFiles/CMakeScratch/TryCompile-rspx5w/Debug/cmTC_463ab.lib" /MACHINE:X64  /machine:x64 cmTC_463ab.dir\\Debug\\CMakeCXXCompilerABI.obj
-          cmTC_463ab.vcxproj -> C:\\Users\\Dimitri\\Documents\\INF585\\newestCode\\inf585_lab_code\\INF585-erosion\\project_code\\build\\CMakeFiles\\CMakeScratch\\TryCompile-rspx5w\\Debug\\cmTC_463ab.exe
+          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.37.32822\\bin\\HostX64\\x64\\link.exe /ERRORREPORT:QUEUE /OUT:"C:\\Users\\Dimitri\\Documents\\INF585\\newestCode\\inf585_lab_code\\INF585-erosion\\project_code\\build\\CMakeFiles\\CMakeScratch\\TryCompile-m7504w\\Debug\\cmTC_75131.exe" /INCREMENTAL /ILK:"cmTC_75131.dir\\Debug\\cmTC_75131.ilk" /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:/Users/Dimitri/Documents/INF585/newestCode/inf585_lab_code/INF585-erosion/project_code/build/CMakeFiles/CMakeScratch/TryCompile-m7504w/Debug/cmTC_75131.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:/Users/Dimitri/Documents/INF585/newestCode/inf585_lab_code/INF585-erosion/project_code/build/CMakeFiles/CMakeScratch/TryCompile-m7504w/Debug/cmTC_75131.lib" /MACHINE:X64  /machine:x64 cmTC_75131.dir\\Debug\\CMakeCXXCompilerABI.obj
+          cmTC_75131.vcxproj -> C:\\Users\\Dimitri\\Documents\\INF585\\newestCode\\inf585_lab_code\\INF585-erosion\\project_code\\build\\CMakeFiles\\CMakeScratch\\TryCompile-m7504w\\Debug\\cmTC_75131.exe
         FinalizeBuildStatus:
-          Deleting file "cmTC_463ab.dir\\Debug\\cmTC_463ab.tlog\\unsuccessfulbuild".
-          Touching "cmTC_463ab.dir\\Debug\\cmTC_463ab.tlog\\cmTC_463ab.lastbuildstate".
-        Done Building Project "C:\\Users\\Dimitri\\Documents\\INF585\\newestCode\\inf585_lab_code\\INF585-erosion\\project_code\\build\\CMakeFiles\\CMakeScratch\\TryCompile-rspx5w\\cmTC_463ab.vcxproj" (default targets).
+          Deleting file "cmTC_75131.dir\\Debug\\cmTC_75131.tlog\\unsuccessfulbuild".
+          Touching "cmTC_75131.dir\\Debug\\cmTC_75131.tlog\\cmTC_75131.lastbuildstate".
+        Done Building Project "C:\\Users\\Dimitri\\Documents\\INF585\\newestCode\\inf585_lab_code\\INF585-erosion\\project_code\\build\\CMakeFiles\\CMakeScratch\\TryCompile-m7504w\\cmTC_75131.vcxproj" (default targets).
         
         Build succeeded.
             0 Warning(s)

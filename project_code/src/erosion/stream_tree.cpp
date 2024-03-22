@@ -1,11 +1,14 @@
 #include "stream_tree.hpp"
 #include "cgp/cgp.hpp"
+#include "datastructure/gridTools.hpp"
 
 #include <vector>
 #include <algorithm> // reverse
 #include <set>
 #include <queue>
 #include <stack>
+
+
 
 // put elsewhere btw
 cgp::int2 const directions[4] = {{1,0}, {0,1}, {-1, 0}, {0, -1}};
@@ -27,9 +30,13 @@ namespace StreamTree
                 
                 int optiDir = -1;
                 float min_height = get_height(m, stream_tree, curr_pos);
+                //int currIndex = getIndex(curr_pos[0], curr_pos[1],dim.y);
+                //float min_height = m.position[currIndex][2];
                 for(int dir = 0; dir < 4; dir++){
                     cgp::int2 next_pos = directions[dir] + curr_pos;
                     float new_height = get_height(m, stream_tree, next_pos);
+                    //int nextIndex = getIndex(next_pos[0], next_pos[1], dim.y);
+                    //float new_height = m.position[nextIndex][2];
                     if(new_height < min_height){
                         min_height = new_height;
                         optiDir = dir;
@@ -37,6 +44,7 @@ namespace StreamTree
                 }
                 if(optiDir == -1){
                     stream_tree(i, j) = StreamTree::NONE; // lake
+
                 }
                 else{
                     cgp::int2 flow_next_pos = directions[optiDir] + curr_pos;
@@ -107,19 +115,20 @@ namespace StreamTree
         std::vector<cgp::int2> sorted_vertices = topological_sort(stream_tree);
         std::reverse(sorted_vertices.begin(), sorted_vertices.end());
 
-        for(cgp::int2 v : sorted_vertices){
-            
-            if (stream_tree(v) == SEA) {
-                continue;
-            }
-            else if(stream_tree(v) == NONE){
+        for (cgp::int2 v : sorted_vertices) {
+            if (stream_tree(v) == NONE) {
+                //it is a sea node??
                 lake_centers(v) = v;
             }
-            else{
-                // check if works properly with SEA
+            else if (stream_tree(v) == SEA) {
+                //it is an outflow?
+                lake_centers(v) = SEA;
+            }
+            else {
                 lake_centers(v) = lake_centers(stream_tree(v)); //works bc of topological sort
             }
         }
+
         //std::abort();
 
         return lake_centers;
@@ -197,7 +206,7 @@ namespace StreamTree
     cgp::grid_2D<float> get_drainage_area(cgp::grid_2D<cgp::int2> const& stream_tree){
         cgp::int2 dim = stream_tree.dimension;
         
-        float area = 1.0 / dim.x / dim.y; // otherwise make an "area" function or even store it somewhere
+        float area = 1.f / dim.x / dim.y; // otherwise make an "area" function or even store it somewhere
         std::vector<cgp::int2> sorted_vertices = topological_sort(stream_tree);
 
         cgp::grid_2D<float> drainage_area;

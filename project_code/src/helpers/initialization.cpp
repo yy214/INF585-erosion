@@ -27,9 +27,8 @@ using namespace StreamTree;
 
 mesh initialize_plane()
 {
-	int const N = 100;
+	int const N = 70;
     
-    /////////////DIMITRI CODE
     cgp::mesh initMesh = mesh_primitive_grid({ -1,-1,0 }, { 1,-1,0 }, { 1,1,0 }, { -1,1,0 }, N, N);
 
 
@@ -69,14 +68,14 @@ mesh initialize_plane()
 
     
     //initMesh.color[k][0] = (p_shape.z - 0.25) * 10.0;
-    int2 colorTextCoord = int2(5,5);
+    //int2 colorTextCoord = int2(5,5);
     //int2 colorTestCoord = getCoord(index, N);
-    int colorIndex = getIndex(colorTextCoord[0], colorTextCoord[1],N);
-    initMesh.color[colorIndex][1] = 100;
+    //int colorIndex = getIndex(colorTextCoord[0], colorTextCoord[1],N);
+    //initMesh.color[colorIndex][1] = 100;
 
     //Visualizing the Stream Trees
 
-    cgp::grid_2D<short> is_sea = floodFill::getfloodBool(initMesh,12);
+    cgp::grid_2D<short> is_sea = floodFill::getfloodBool(initMesh,0);
 
     for (int i = 0; i < N; i++) {
         for (int j = 0; j < N; j++) {
@@ -87,16 +86,9 @@ mesh initialize_plane()
             //initMesh.position[colorIndex][2] = 0.0f;
             if (is_sea(i, j) == 1){
                 int colorIndex = getIndex(i, j, N);
-                initMesh.color[colorIndex][0] = 0;
-                initMesh.color[colorIndex][1] = 0;
-                initMesh.color[colorIndex][2] = 100;
-                //is_sea_bool(i,j) = true;
-                //initMesh.position[colorIndex][2] = 0.0f;
-            }
-
-            //if under sea level, forced to be 0
-            if (initMesh.position[colorIndex][2] < 0.0) {
-                initMesh.position[colorIndex][2] = 0.0;
+                //initMesh.color[colorIndex][0] = 0.f;
+                //initMesh.color[colorIndex][1] = 0.f;
+                //initMesh.color[colorIndex][2] = 100.f;
             }
 
         }
@@ -104,10 +96,10 @@ mesh initialize_plane()
     //is_sea.fill(0);
 
     cgp::grid_2D<cgp::int2> newStream = get_base_stream_tree(initMesh, is_sea);
-    std::cout << "builing lakesssssssssss";
+    //std::cout << "builing lakesssssssssss";
     cgp::grid_2D<cgp::int2> newLakes = get_lakes(newStream);
-    std::cout << newLakes;
-    std::cout << "llllllllaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
+    //std::cout << newLakes;
+    //std::cout << "llllllllaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
     
 
     std::map<cgp::int2, std::vector<LakeEdgeHeight>, lex_order_class> newLakeGraph = get_lake_graph(initMesh,newStream,newLakes);
@@ -124,7 +116,7 @@ mesh initialize_plane()
     erosionScheme myErosion = erosionScheme();
 
     std::cout << "beeeeeeeeeeeeeeeeeeesssssssssssssssst";
-    std::cout << newDrainage;
+    //std::cout << newDrainage;
     myErosion.setHeightMap(initMesh);
     std::cout << "teesssssssssssssssst";
     //std::cout << myErosion.heightMap;
@@ -132,8 +124,19 @@ mesh initialize_plane()
     //std::cout << newDrainage;
 
     
-    
-    myErosion.applyErosionStep(initMesh, newStream, newLakes, 100);
+    for (int i = 0; i < 20; i++) {
+        myErosion.applyErosionStep(0.0001, initMesh, newStream, newLakes, newDrainage);
+
+        
+        //do the next step
+        is_sea = floodFill::getfloodBool(initMesh, 0);
+        newStream = get_base_stream_tree(initMesh, is_sea);
+        newLakes = get_lakes(newStream);
+        newLakeGraph = get_lake_graph(initMesh, newStream, newLakes);
+        get_final_stream_tree_from_lake_graph(newStream, newLakeGraph);
+        newDrainage = get_drainage_area(newStream);
+
+    }
     //std::abort();
     /*myErosion.applyErosionStep(initMesh, newStream, 100);
     myErosion.applyErosionStep(initMesh, newStream, 100);
@@ -143,7 +146,7 @@ mesh initialize_plane()
     //std::cout << myErosion.heightMap;
 
 
-    std::cout << newDrainage;
+    //std::cout << newDrainage;
 
     for (int i = 0; i < N; i++) {
         for (int j = 0; j < N; j++) {
@@ -151,16 +154,15 @@ mesh initialize_plane()
             if (true) {
                 //std::cout << 'ha';
                 int colorIndex = getIndex(i, j, N);
-                initMesh.color[colorIndex][2] = newDrainage(i, j) * 300.0;
+                //initMesh.color[colorIndex][2] = newDrainage(i, j) * 300.0;
 
                 //Erosion update
-                //initMesh.position[colorIndex][2] = myErosion.heightMap(i, j) + 1.0;
+                initMesh.position[colorIndex][2] = myErosion.heightMap(i, j) + 0.0;
             }
         }
     }
 
     return initMesh;
-    //////////////////END DIMITRI CODE
 }
 mesh initialize_cylinder()
 {

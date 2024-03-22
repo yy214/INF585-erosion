@@ -14,7 +14,7 @@ class erosionScheme {
 	void setHeightMap(cgp::mesh m);
 
 
-	void applyErosionStep(cgp::mesh& m, cgp::grid_2D<cgp::int2> const& stream_tree, cgp::grid_2D<cgp::int2> lakeCenters,float step);
+	void applyErosionStep(float step,cgp::mesh& m, cgp::grid_2D<cgp::int2> const& stream_tree, cgp::grid_2D<cgp::int2> lakeCenters, cgp::grid_2D<float> areaMap);
 
 
 };
