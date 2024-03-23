@@ -1,4 +1,4 @@
-# Install script for directory: C:/Users/Dimitri/Documents/INF585/newestCode/inf585_lab_code/INF585-erosion/project_code
+# Install script for directory: D:/cours/X 3A/P2/inf585_lab_code/INF585-erosion/project_code
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -40,5 +40,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "C:/Users/Dimitri/Documents/INF585/newestCode/inf585_lab_code/INF585-erosion/project_code/build/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "D:/cours/X 3A/P2/inf585_lab_code/INF585-erosion/project_code/build/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

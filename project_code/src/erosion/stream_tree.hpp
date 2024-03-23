@@ -4,26 +4,8 @@
 #include <vector>
 #include <map>
 #include <algorithm>
+#include "datastructure/gridTools.hpp"
 
-inline bool operator==(cgp::int2 const& a, cgp::int2 const& b){
-    return a.x == b.x && a.y == b.y;
-}
-
-inline bool operator!=(cgp::int2 const& a, cgp::int2 const& b){
-    return !(a==b);
-}
-
-inline bool lex_order(cgp::int2 const& a, cgp::int2 const& b){
-    if(a.x == b.x) return a.y < b.y;
-    return a.x < b.x;
-}
-
-class lex_order_class{
-public:
-    inline bool operator()(cgp::int2 const& a, cgp::int2 const& b) const {
-        return lex_order(a,b);
-    }
-};
 
 namespace StreamTree{
     struct LakeEdge{
@@ -60,10 +42,6 @@ namespace StreamTree{
 
     const cgp::int2 NONE = {-1,-1};
     const cgp::int2 SEA = {-42,-42};
-
-    inline float get_height(cgp::mesh const& m, cgp::grid_2D<cgp::int2> const& stream_tree, cgp::int2 pos){
-        return m.position(stream_tree.index_to_offset(pos.x, pos.y)).z;
-    }
 
     cgp::grid_2D<cgp::int2> get_base_stream_tree(cgp::mesh const& m, cgp::grid_2D<short> const& is_sea);
 

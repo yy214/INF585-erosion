@@ -29,12 +29,12 @@ namespace StreamTree
                 if(is_sea(curr_pos)) continue;
                 
                 int optiDir = -1;
-                float min_height = get_height(m, stream_tree, curr_pos);
+                float min_height = get_height(m, curr_pos, dim.y);
                 //int currIndex = getIndex(curr_pos[0], curr_pos[1],dim.y);
                 //float min_height = m.position[currIndex][2];
                 for(int dir = 0; dir < 4; dir++){
                     cgp::int2 next_pos = directions[dir] + curr_pos;
-                    float new_height = get_height(m, stream_tree, next_pos);
+                    float new_height = get_height(m, next_pos, dim.y);
                     //int nextIndex = getIndex(next_pos[0], next_pos[1], dim.y);
                     //float new_height = m.position[nextIndex][2];
                     if(new_height < min_height){
@@ -152,7 +152,7 @@ namespace StreamTree
                 LakeEdge lake_edge = {lake_a, lake_b};
                 lake_edge.make_consistent();
 
-                float curr_height = std::min(get_height(m, stream_tree, curr_pos), get_height(m, stream_tree, next_pos));
+                float curr_height = std::min(get_height(m, curr_pos, dim.y), get_height(m, next_pos, dim.y));
                 if(min_edge_height.find(lake_edge) == min_edge_height.end()){ // 1st edge between these 2 lakes
                     min_edge_height[lake_edge] = curr_height;
                 }

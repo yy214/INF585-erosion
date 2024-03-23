@@ -4,42 +4,20 @@
 #include "datastructure/gridTools.hpp"
 #include <queue>
 #include "erosion/stream_tree.hpp"
+#include "erosion/flood_fill.hpp"
+#include "helpers/gui.hpp"
+#include "math.h"
 
-using namespace cgp;
 
-//void erosionSheme::initializeWithMesh(c
-
-void erosionScheme::setHeightMap(cgp::mesh m)
+void ErosionScheme::applyErosionStep(cgp::mesh& m, cgp::grid_2D<cgp::int2> const& stream_tree, cgp::grid_2D<cgp::int2> lakeCenters, cgp::grid_2D<float> areaMap, gui_parameters const& gui_param)
 {
-	
-
 	int total = m.position.size();
 	int N = std::sqrt(total);
-
-	heightMap = cgp::grid_2D<float>(N);
-	
-	for (int i = 0; i < m.position.size(); i++) {
-		int2 currPoint = getCoord(i, N);
-		heightMap(currPoint[0], currPoint[1]) = m.position[i][2];
-	}
-}
-
-void erosionScheme::applyErosionStep(float step,cgp::mesh& m, cgp::grid_2D<cgp::int2> const& stream_tree, cgp::grid_2D<cgp::int2> lakeCenters, cgp::grid_2D<float> areaMap)
-{
-
-	int total = m.position.size();
-	int N = std::sqrt(total);
-	//int2 POS = int2(0,0);
-	int k = 5;
-	int M = 0.5;
+	float step = std::pow(gui_param.log_dt, 10);
 
 	//for now this is constant
-	float u = 0.001;
+	float uplift = 0.001f;
 
-
-
-	//the queue to search all the root nodes / lakes??
-	std::queue<int2> rootQueue;
 
 	std::vector<cgp::int2> sorted_vertices = StreamTree::topological_sort(stream_tree);
 	std::reverse(sorted_vertices.begin(), sorted_vertices.end());
@@ -48,110 +26,77 @@ void erosionScheme::applyErosionStep(float step,cgp::mesh& m, cgp::grid_2D<cgp::
 		int colorIndex = getIndex(v[0], v[1], N);
 		float newHeight = 0.0f;
 		cgp::vec3 posVi = m.position[colorIndex];
-		if (stream_tree(v) == cgp::int2(-42, -42)) {
-			//IT IS AN OUTFLOW
-			m.color[colorIndex] = vec3(100.0, 100.0, 100.0);
-			newHeight = posVi[2] + u;
-
-
-
-		}
-		else if (lakeCenters(v) == v) {
-
+		if (stream_tree(v) == StreamTree::NONE) {
 			//it is a sea node
 			m.color[colorIndex] = vec3(100.0, 0.0, 0.0);
-			newHeight = posVi[2] + u;
-
-
+			newHeight = posVi[2] + uplift;
 		}
 		else {
-			//it is a non-root node
-			m.color[colorIndex] = vec3(0.0, 100.0, 0.0);
-			int2 reciever = stream_tree(v);
+			int2 receiver = stream_tree(v);
+			float receiver_height = 0;
+			if (receiver == StreamTree::SEA) {
+				//IT IS AN OUTFLOW
+				m.color[colorIndex] = vec3(100.0, 100.0, 100.0);
+			}
+			else {
+				//it is a non-root node
+				m.color[colorIndex] = vec3(0.0, 100.0, 0.0);
+				receiver_height = get_height(m, receiver, N);
+			}
 
-			//float kAm = 
-			cgp::vec3 posVj = m.position[getIndex(reciever[0],reciever[1],N)];
+			//cgp::vec3 posVj = m.position[getIndex(receiver[0],receiver[1],N)];
 
-			float piPJ = std::pow( (pow(posVi[0] - posVj[0],2) + pow(posVi[1] - posVj[1], 2)), 0.5);
-			float kAm = k * std::pow(areaMap(v[0], v[1]), M);
+			float piPJ = 1.f / N;//std::sqrt(pow(posVi[0] - posVj[0],2) + pow(posVi[1] - posVj[1], 2));
+			float kAm = gui_param.param_k * std::pow(areaMap(v[0], v[1]), gui_param.param_m);
 
-			
-			//here we assume uplift is 0;
-
-			newHeight = (heightMap(v[0], v[1]) + step * (u + kAm * heightMap(reciever[0], reciever[1]))) /
+			get_height(m, v, N) = (get_height(m, v, N) + step * (uplift + kAm * receiver_height / piPJ)) /
 				(1.0 + kAm * step / piPJ);
 
-			//heightMap(v[0], v[1]) = -1.0;
-			//IT WORKS!!!!
-			
-			//heightMap(v[0], v[1]) = 0.0;
 		}
-
-		heightMap(v[0], v[1]) = newHeight;
-
-		
-		
-
+		//heightMap(v[0], v[1]) = newHeight;
 	}
-
-	//update the positions
-	for (int i = 0; i < N; i++) {
-		for (int j = 0; j < N; j++) {
-			//std::cout << newLakes(i, j) << std::endl;
-			if (true) {
-				//std::cout << 'ha';
-				int colorIndex = getIndex(i, j, N);
-				//initMesh.color[colorIndex][2] = newDrainage(i, j) * 300.0;
-
-				//Erosion update
-				m.position[colorIndex][2] = heightMap(i, j) + 0.0;
-			}
-		}
-	}
-
-	/*for (node in nodes?):
-		if (node is root):
-			rootQueue.push(node)*/
-	
-
-	cgp::grid_2D<float> newHeightMap = cgp::grid_2D<float>(N);
-
-	//cgp::grid_2D<float> areaMap = cgp::grid_2D<float>(N);
+}
 
 
+//Visualizing the Stream Trees
+void ErosionScheme::erodeOnce(cgp::mesh& m, gui_parameters const& gui_param) {
+	cgp::grid_2D<short> is_sea = floodFill::getfloodBool(m, 0);
 
-	//I don't even think we need a new heightmap
-	//for (int i = 0; i < m.position.size(); i++) {
-	std::cout << rootQueue.size();
-	std::cout << "queueueueueueueu";
-	
+	size_t N = std::sqrt(m.position.size());
 
-	//while (!rootQueue.empty()) {
-
-	//	//std::cout << rootQueue.front();
-	//	//rootQueue.pop();
+	//for (int i = 0; i < N; i++) {
+	//	for (int j = 0; j < N; j++) {
+	//		//vec3& p_shape = initMesh.position[colorIndex];
+	//		//p_shape[2] = 0.0f;
 
 
-	//	std::cout << "iter";
-	//	int2 currPoint = rootQueue.front();
-	//	rootQueue.pop();
-	//	
-	//	std::cout << currPoint;
-	//	int colorIndex = getIndex(currPoint[0], currPoint[1], N);
-	//	m.color[colorIndex] = cgp::vec3(100.0, 0.0, 0.0);
+	//		//initMesh.position[colorIndex][2] = 0.0f;
+	//		if (is_sea(i, j) == 1) {
+	//			int colorIndex = getIndex(i, j, N);
+	//			//initMesh.color[colorIndex][0] = 0.f;
+	//			//initMesh.color[colorIndex][1] = 0.f;
+	//			//initMesh.color[colorIndex][2] = 100.f;
+	//		}
 
-	//	////must check if the node)) a reciever or not
-	//	//float piPJ = 1.0;
-	//	//float kAm = k * std::pow(areaMap(currPoint[0], currPoint[1]), M);
-	//	////here we assume uplift is 0;
-	//	int2 jPoint = stream_tree(currPoint);
-	//	std::cout << jPoint;
-	//	//
-	//	////int2 currPoint = getCoord(i, N);
-	//	//heightMap(currPoint[0], currPoint[1]) = (heightMap(currPoint[0], currPoint[1]) + 
-	//	//	step * (0.0 + kAm * heightMap(jPoint[0], jPoint[1])) ) /
-	//	//	(1.0 + kAm *step / piPJ);
+	//	}
 	//}
+	//is_sea.fill(0);
 
+	std::cout << "building base stream tree" << std::endl;
+	cgp::grid_2D<cgp::int2> newStream = StreamTree::get_base_stream_tree(m, is_sea);
 
+	std::cout << "building lakes" << std::endl;;
+	cgp::grid_2D<cgp::int2> newLakes = StreamTree::get_lakes(newStream);
+
+	std::cout << "updating stream tree with lakes" << std::endl;
+	std::map<cgp::int2, 
+			 std::vector<StreamTree::LakeEdgeHeight>, 
+			 lex_order_class> newLakeGraph = StreamTree::get_lake_graph(m, newStream, newLakes);
+	get_final_stream_tree_from_lake_graph(newStream, newLakeGraph);
+
+	std::cout << "calculating drainage areas" << std::endl;
+	cgp::grid_2D<float> newDrainage = StreamTree::get_drainage_area(newStream);
+
+	std::cout << "applying erosion" << std::endl;
+	ErosionScheme::applyErosionStep(m, newStream, newLakes, newDrainage, gui_param);
 }
