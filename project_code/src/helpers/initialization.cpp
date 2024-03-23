@@ -25,34 +25,23 @@ using namespace cgp;
 using namespace colorInterpolation;
 using namespace StreamTree;
 
+/// <summary>
+/// Initializes a plane with an island and a sea
+/// </summary>
+/// <returns></returns>
 mesh initialize_plane()
 {
-	int const N = 70;
+	int const N = 20;
     
     cgp::mesh initMesh = mesh_primitive_grid({ -1,-1,0 }, { 1,-1,0 }, { 1,1,0 }, { -1,1,0 }, N, N);
 
-
     vec3 const translation_normal = vec3(0.0, 0.0, 10.0);
-
-    //A simple test for eigen/libigl
-    Eigen::MatrixXd V(4, 2);
-    V << 0, 0,
-        1, 0,
-        1, 1,
-        0, 1;
-    Eigen::MatrixXi F(2, 3);
-    F << 0, 1, 2,
-        0, 2, 3;
-    Eigen::SparseMatrix<double> L;
-    igl::cotmatrix(V, F, L);
-    std::cout << "Hello, mesh: " << std::endl << L * V << std::endl;
 
     //size_t const N = shape.position.size();
     for (size_t k = 0; k < N*N; ++k)
     {
             vec3& p_shape = initMesh.position[k];
             float noise = noise_perlin(1.5f * p_shape,10,0.3,1.5);
-            
 
             //stackoverflow.com/questions/10847007/using-the-gaussian-probability-density-function-in-c
             float THE_DISTANCE = (pow((initMesh.position[k][0] - 0.0), 2) + pow((initMesh.position[k][1] - 0.0), 2));  // I must make this nicer later
@@ -63,109 +52,13 @@ mesh initialize_plane()
             //initMesh.color[k][0] = (p_shape.z - 0.25) * 10.0;
             //initMesh.color[k] = getColor(p_shape[2]);
 
-
     }
-
     
     //initMesh.color[k][0] = (p_shape.z - 0.25) * 10.0;
     //int2 colorTextCoord = int2(5,5);
     //int2 colorTestCoord = getCoord(index, N);
     //int colorIndex = getIndex(colorTextCoord[0], colorTextCoord[1],N);
     //initMesh.color[colorIndex][1] = 100;
-
-    //Visualizing the Stream Trees
-
-    cgp::grid_2D<short> is_sea = floodFill::getfloodBool(initMesh,0);
-
-    for (int i = 0; i < N; i++) {
-        for (int j = 0; j < N; j++) {
-            //vec3& p_shape = initMesh.position[colorIndex];
-            //p_shape[2] = 0.0f;
-            
-
-            //initMesh.position[colorIndex][2] = 0.0f;
-            if (is_sea(i, j) == 1){
-                int colorIndex = getIndex(i, j, N);
-                //initMesh.color[colorIndex][0] = 0.f;
-                //initMesh.color[colorIndex][1] = 0.f;
-                //initMesh.color[colorIndex][2] = 100.f;
-            }
-
-        }
-    }
-    //is_sea.fill(0);
-
-    cgp::grid_2D<cgp::int2> newStream = get_base_stream_tree(initMesh, is_sea);
-    //std::cout << "builing lakesssssssssss";
-    cgp::grid_2D<cgp::int2> newLakes = get_lakes(newStream);
-    //std::cout << newLakes;
-    //std::cout << "llllllllaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
-    
-
-    std::map<cgp::int2, std::vector<LakeEdgeHeight>, lex_order_class> newLakeGraph = get_lake_graph(initMesh,newStream,newLakes);
-    get_final_stream_tree_from_lake_graph(newStream,newLakeGraph);
- 
-    cgp::grid_2D<float> newDrainage = get_drainage_area(newStream);
-    //std::abort();
-    //std::cout << newStream;
-
-
-
-
-    //Erosion stuff
-    erosionScheme myErosion = erosionScheme();
-
-<<<<<<< HEAD
-    std::cout << "beeeeeeeeeeeeeeeeeeesssssssssssssssst";
-    //std::cout << newDrainage;
-=======
-    //std::cout << "beeeeeeeeeeeeeeeeeeesssssssssssssssst";
-    //std::cout << newLakes;
->>>>>>> michael_branch
-    myErosion.setHeightMap(initMesh);
-    //std::cout << "teesssssssssssssssst";
-    //std::cout << myErosion.heightMap;
-    //std::cout << newLakeGraph.;
-    //std::cout << newDrainage;
-
-    
-    for (int i = 0; i < 20; i++) {
-        myErosion.applyErosionStep(0.0001, initMesh, newStream, newLakes, newDrainage);
-
-        
-        //do the next step
-        is_sea = floodFill::getfloodBool(initMesh, 0);
-        newStream = get_base_stream_tree(initMesh, is_sea);
-        newLakes = get_lakes(newStream);
-        newLakeGraph = get_lake_graph(initMesh, newStream, newLakes);
-        get_final_stream_tree_from_lake_graph(newStream, newLakeGraph);
-        newDrainage = get_drainage_area(newStream);
-
-    }
-    //std::abort();
-    /*myErosion.applyErosionStep(initMesh, newStream, 100);
-    myErosion.applyErosionStep(initMesh, newStream, 100);
-    myErosion.applyErosionStep(initMesh, newStream, 100);
-    myErosion.applyErosionStep(initMesh, newStream, 100);*/
-
-    //std::cout << myErosion.heightMap;
-
-
-    //std::cout << newDrainage;
-
-    for (int i = 0; i < N; i++) {
-        for (int j = 0; j < N; j++) {
-            //std::cout << newLakes(i, j) << std::endl;
-            if (true) {
-                //std::cout << 'ha';
-                int colorIndex = getIndex(i, j, N);
-                //initMesh.color[colorIndex][2] = newDrainage(i, j) * 300.0;
-
-                //Erosion update
-                initMesh.position[colorIndex][2] = myErosion.heightMap(i, j) + 0.0;
-            }
-        }
-    }
 
     return initMesh;
 }

@@ -12,3 +12,13 @@ int2 getCoord(int index, int N) {
 
 	return int2(x, y);
 };
+
+float& get_height(cgp::mesh& m, cgp::int2 pos, int N)
+{
+	return m.position(getIndex(pos.x, pos.y, N)).z;
+}
+
+float get_height(cgp::mesh const& m, cgp::int2 pos, int N)
+{
+	return m.position(getIndex(pos.x, pos.y, N)).z;
+}

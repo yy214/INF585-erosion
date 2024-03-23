@@ -249,8 +249,13 @@ void keyboard_callback(GLFWwindow* window, int key, int scancode, int action, in
 	ImGui_ImplGlfw_KeyCallback(window, key, scancode, action, mods);
 	bool imgui_capture_keyboard = ImGui::GetIO().WantCaptureKeyboard;
 	
-	if(!imgui_capture_keyboard){
+	if (!imgui_capture_keyboard) {
 		scene.inputs.keyboard.update_from_glfw_key(key, action);
+
+		if (key == GLFW_KEY_E && action == GLFW_PRESS) {
+			scene.gui.erosion_dummy = true;
+		}
+
 		scene.keyboard_event();
 
 		// Press 'F' for full screen mode

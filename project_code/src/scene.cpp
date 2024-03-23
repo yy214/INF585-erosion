@@ -5,6 +5,8 @@
 #include <Eigen/Dense>
 #include <Eigen/Sparse>
 
+#include "erosion/erosion_scheme.hpp"
+
 #include <cmath>
 
 using namespace cgp;
@@ -89,6 +91,10 @@ void scene_structure::display_frame()
 	if (gui.display_wireframe)
 		draw_wireframe(deforming_shape.visual, environment, { 0,0,0 });
 
+	if (gui.erosion_dummy || gui.continuous_erosion) {
+		gui.erosion_dummy = false;
+		ErosionScheme::erodeOnce(deforming_shape.shape, gui);
+	}
 
 	deforming_shape.visual.vbo_position.update(deforming_shape.shape.position);
 	deforming_shape.visual.vbo_color.update(deforming_shape.shape.color);

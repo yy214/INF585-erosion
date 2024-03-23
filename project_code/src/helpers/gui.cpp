@@ -35,8 +35,9 @@ bool gui_parameters::display()
 	ImGui::Checkbox("Do 1 erosion (or press E)", &erosion_dummy);
 	ImGui::Checkbox("Continuious erosion", &continuous_erosion);
 
-	ImGui::SliderFloat("Parameter m", &param_m, 0.1f, 1.f);
-	ImGui::SliderFloat("Parameter n", &param_n, 0.2f, 2.f);
+	ImGui::SliderFloat("Parameter k", &param_n, 0.01f, 10.f);
+	ImGui::SliderFloat("Parameter m", &param_m, 0.1f, 0.9f);
+	//ImGui::SliderFloat("Parameter n", &param_n, 0.2f, 2.f);
 
 	// Select falloff distance using slider
     ImGui::SliderFloat("Falloff distance", &deformer_parameters.falloff, 0.01f, 0.8f);
