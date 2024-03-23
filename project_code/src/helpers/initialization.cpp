@@ -31,11 +31,14 @@ using namespace StreamTree;
 /// <returns></returns>
 mesh initialize_plane()
 {
-	int const N = 20;
+	int const N = 70;
     
     cgp::mesh initMesh = mesh_primitive_grid({ -1,-1,0 }, { 1,-1,0 }, { 1,1,0 }, { -1,1,0 }, N, N);
 
     vec3 const translation_normal = vec3(0.0, 0.0, 10.0);
+
+    vec3 const translation_x = vec3(10.0, 0.0, 10.0);
+    vec3 const translation_y = vec3(0.0, 10.0, 0.0);
 
     //size_t const N = shape.position.size();
     for (size_t k = 0; k < N*N; ++k)
@@ -51,6 +54,10 @@ mesh initialize_plane()
             p_shape += (gaussian + noise - 1.0) * 0.05 * translation_normal;
             //initMesh.color[k][0] = (p_shape.z - 0.25) * 10.0;
             //initMesh.color[k] = getColor(p_shape[2]);
+
+            //Just to add a bit of random noise (these numbers are indeed correct)
+            p_shape +=  translation_x * (rand() - 0.5) * 0.00000006f * float(100.f/N);
+            p_shape += translation_y * (rand() - 0.5) * 0.00000006f * float(100.f / N);
 
     }
     

@@ -31,7 +31,7 @@ bool gui_parameters::display()
     ImGui::RadioButton("Surface normal",ptr_deformer_direction, direction_surface_normal); ImGui::SameLine();
 	ImGui::RadioButton("Always z axis", ptr_deformer_direction, direction_z);
 
-	ImGui::SliderFloat("(In simultation) time interval", &log_dt, -6.f, -4.f);
+	ImGui::SliderFloat("(In simultation) time interval", &log_dt, -0.7f, -0.01f);
 	ImGui::Checkbox("Do 1 erosion (or press E)", &erosion_dummy);
 	ImGui::Checkbox("Continuious erosion", &continuous_erosion);
 

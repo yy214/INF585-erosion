@@ -7,7 +7,9 @@
 #include "erosion/flood_fill.hpp"
 #include "helpers/gui.hpp"
 #include "math.h"
+#include "helpers/colorInterp.hpp"
 
+using namespace colorInterpolation;
 
 void ErosionScheme::applyErosionStep(cgp::mesh& m, cgp::grid_2D<cgp::int2> const& stream_tree, cgp::grid_2D<cgp::int2> lakeCenters, cgp::grid_2D<float> areaMap, gui_parameters const& gui_param)
 {
@@ -16,7 +18,8 @@ void ErosionScheme::applyErosionStep(cgp::mesh& m, cgp::grid_2D<cgp::int2> const
 	float step = std::pow(gui_param.log_dt, 10);
 
 	//for now this is constant
-	float uplift = 0.001f;
+	float uplift = 0.035f;
+	//float uplift = 0.025f;
 
 
 	std::vector<cgp::int2> sorted_vertices = StreamTree::topological_sort(stream_tree);
@@ -29,7 +32,7 @@ void ErosionScheme::applyErosionStep(cgp::mesh& m, cgp::grid_2D<cgp::int2> const
 		if (stream_tree(v) == StreamTree::NONE) {
 			//it is a sea node
 			m.color[colorIndex] = vec3(100.0, 0.0, 0.0);
-			newHeight = posVi[2] + uplift;
+			newHeight = posVi[2] + uplift*step;
 		}
 		else {
 			int2 receiver = stream_tree(v);
@@ -41,7 +44,7 @@ void ErosionScheme::applyErosionStep(cgp::mesh& m, cgp::grid_2D<cgp::int2> const
 			else {
 				//it is a non-root node
 				m.color[colorIndex] = vec3(0.0, 100.0, 0.0);
-				receiver_height = get_height(m, receiver, N);
+				receiver_height = get_height(m, receiver, N) + uplift;
 			}
 
 			//cgp::vec3 posVj = m.position[getIndex(receiver[0],receiver[1],N)];
@@ -54,7 +57,11 @@ void ErosionScheme::applyErosionStep(cgp::mesh& m, cgp::grid_2D<cgp::int2> const
 
 		}
 		//heightMap(v[0], v[1]) = newHeight;
+		
+		//To color it properly
+		m.color[colorIndex] = getColor(m.position[colorIndex][2]);
 	}
+
 }
 
 

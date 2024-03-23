@@ -20,6 +20,11 @@ cgp::grid_2D<short> floodFill::getfloodBool(cgp::mesh const& m,int initialIndex)
 	std::queue<int2> coordQueue;
 
 	coordQueue.push(currPoint);
+	//Also push many more points
+	coordQueue.push(int2(dim-1,dim-1));
+	coordQueue.push(int2(0, dim-1));
+	coordQueue.push(int2(dim-1, dim-1));
+	coordQueue.push(int2(int(dim/2), dim-1));
 
 
 	int counter = 0;
