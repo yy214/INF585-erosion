@@ -1,44 +1,163 @@
-﻿  initialization.cpp
+﻿  Building Custom Rule C:/Users/Dimitri/Documents/INF585/newestCode/inf585_lab_code/INF585-erosion/project_code/CMakeLists.txt
+  basic_types.cpp
+  error.cpp
+  string.cpp
+  test_numarray.cpp
+  test_numarray_stack.cpp
+  files.cpp
+  test_grid.cpp
+  test_grid_stack_2D.cpp
+  offset_grid.cpp
+  mat_functions.cpp
+  test_vec_mat.cpp
+  mat2.cpp
+  mat3.cpp
+  mat4.cpp
+  test_matrix_stack.cpp
+  image.cpp
+C:\Users\Dimitri\Documents\INF585\newestCode\inf585_lab_code\cgp\library\cgp\02_numarray\numarray_stack\test\test_numarray_stack.cpp(185,57): warning C4305: 'argument': truncation from 'double' to 'const T'
+          with
+          [
+              T=float
+          ]
+C:\Users\Dimitri\Documents\INF585\newestCode\inf585_lab_code\cgp\library\cgp\02_numarray\numarray\test\test_numarray.cpp(111,49): warning C4305: 'initializing': truncation from 'double' to '_Ty'
+          with
+          [
+              _Ty=float
+          ]
+  noise.cpp
+  rand.cpp
+  affine.cpp
+  affine_rt.cpp
+  affine_rts.cpp
+  frame.cpp
+  interpolation.cpp
+  projection.cpp
+  quaternion.cpp
+  rotation_transform.cpp
+  test_rotation.cpp
+  camera_first_person.cpp
+  camera_first_person_euler.cpp
+  camera_generic_base.cpp
+  camera_orbit.cpp
+  camera_orbit_euler.cpp
+  common_functions.cpp
+  camera_projection.cpp
+  mesh.cpp
+  primitive.cpp
+  bounding_box.cpp
+  curve.cpp
+  marching_cubes_lut.cpp
+  marching_cube.cpp
+  intersection.cpp
+  spatial_domain_grid_3D.cpp
+  ebo.cpp
+  opengl_buffer.cpp
+  vbo.cpp
+  debug.cpp
+  emscripten.cpp
+  fbo.cpp
+  cache_uniform_location.cpp
+  shaders.cpp
+  texture.cpp
+  uniform.cpp
+  window.cpp
+  input_devices.cpp
+  curve_drawable.cpp
+  curve_drawable_dynamic_extend.cpp
+  hierarchy_mesh_drawable.cpp
+  material_mesh_drawable_phong.cpp
+  mesh_drawable.cpp
+  skybox_drawable.cpp
+  trajectory_drawable.cpp
+  triangles_drawable.cpp
+  timer_basic.cpp
+  timer_event_periodic.cpp
+  timer_fps.cpp
+  timer_interval.cpp
+  picking_plane.cpp
+  picking_spheres.cpp
+  picking_structure.cpp
+  velocity_tracker.cpp
+  camera_controller_2d_displacement.cpp
+  camera_controller_first_person.cpp
+  camera_controller_first_person_euler.cpp
+  camera_controller_fly_mode.cpp
+  camera_controller_generic_base.cpp
+  camera_controller_orbit.cpp
+  camera_controller_orbit_euler.cpp
+  test_camera_controller.cpp
+  obj.cpp
+  obj_advanced.cpp
+  path.cpp
+  imgui_demo.cpp
+  imgui_draw.cpp
+  imgui_impl_glfw.cpp
+  imgui_impl_opengl3.cpp
+  imgui_widgets.cpp
+  jpgd.cpp
+  jpge.cpp
+  lodepng.cpp
+  simplexnoise1234.cpp
+  HalfedgeBuilder.cpp
+  HalfedgeDS.cpp
+  gridTools.cpp
+  deformers.cpp
+  erosion_scheme.cpp
+  flood_fill.cpp
+  stream_tree.cpp
+  colorInterp.cpp
+  gui.cpp
+  initialization.cpp
+  picking_visual.cpp
+  main.cpp
+  scene.cpp
+C:\Users\Dimitri\Documents\INF585\newestCode\inf585_lab_code\INF585-erosion\project_code\src\erosion\erosion_scheme.cpp(37,10): warning C4305: 'initializing': truncation from 'double' to 'float'
+C:\Users\Dimitri\Documents\INF585\newestCode\inf585_lab_code\INF585-erosion\project_code\src\helpers\colorInterp.cpp(17,15): warning C4305: 'initializing': truncation from 'double' to 'float'
+C:\Users\Dimitri\Documents\INF585\newestCode\inf585_lab_code\INF585-erosion\project_code\src\helpers\colorInterp.cpp(18,18): warning C4305: 'initializing': truncation from 'double' to 'float'
+C:\Users\Dimitri\Documents\INF585\newestCode\inf585_lab_code\INF585-erosion\project_code\src\datastructure\HalfedgeBuilder.cpp(169,15): warning C4101: 'oppPrev': unreferenced local variable
+C:\Users\Dimitri\Documents\INF585\newestCode\inf585_lab_code\INF585-erosion\project_code\src\datastructure\HalfedgeBuilder.cpp(196,7): warning C4189: 'nInsertedHalfedges': local variable is initialized but not referenced
+C:\Users\Dimitri\Documents\INF585\newestCode\inf585_lab_code\INF585-erosion\project_code\src\datastructure\HalfedgeBuilder.cpp(197,7): warning C4189: 'bCount': local variable is initialized but not referenced
 C:\Users\Dimitri\Documents\INF585\newestCode\inf585_lab_code\INF585-erosion\project_code\src\helpers\initialization.cpp(54,58): warning C4305: 'argument': truncation from 'double' to 'float'
 C:\Users\Dimitri\Documents\INF585\newestCode\inf585_lab_code\INF585-erosion\project_code\src\helpers\initialization.cpp(60,66): warning C4305: 'argument': truncation from 'double' to 'float'
 C:\Users\Dimitri\Documents\INF585\newestCode\inf585_lab_code\INF585-erosion\project_code\src\helpers\initialization.cpp(128,36): warning C4305: 'argument': truncation from 'double' to 'float'
 C:\Users\Dimitri\Documents\INF585\newestCode\inf585_lab_code\INF585-erosion\project_code\src\helpers\initialization.cpp(88,21): warning C4189: 'colorIndex': local variable is initialized but not referenced
 C:\Users\Dimitri\Documents\INF585\newestCode\inf585_lab_code\INF585-erosion\project_code\src\helpers\initialization.cpp(197,39): warning C4305: 'initializing': truncation from 'double' to 'float'
-C:\Users\Dimitri\Documents\INF585\newestCode\inf585_lab_code\INF585-erosion\project_code\lib\igl\sort.cpp(182,38): warning C4459: declaration of 'Index' hides global declaration
-C:\Users\Dimitri\Documents\INF585\newestCode\inf585_lab_code\INF585-erosion\project_code\lib\eigen-3.4.0\Eigen\src/Core/util/Meta.h(74,40): message : see declaration of 'Eigen::Index'
+C:\Users\Dimitri\Documents\INF585\newestCode\inf585_lab_code\INF585-erosion\project_code\lib\igl\sort.cpp(182,38): warning C4459: declaration of 'Index' hides global declaration (compiling source file C:\Users\Dimitri\Documents\INF585\newestCode\inf585_lab_code\INF585-erosion\project_code\src\helpers\initialization.cpp)
+C:\Users\Dimitri\Documents\INF585\newestCode\inf585_lab_code\INF585-erosion\project_code\lib\eigen-3.4.0\Eigen\src/Core/util/Meta.h(74,40): message : see declaration of 'Eigen::Index' (compiling source file C:\Users\Dimitri\Documents\INF585\newestCode\inf585_lab_code\INF585-erosion\project_code\src\helpers\initialization.cpp)
 C:\Users\Dimitri\Documents\INF585\newestCode\inf585_lab_code\INF585-erosion\project_code\lib\igl\sort.cpp(37,19): message : see reference to function template instantiation 'void igl::sort2<Derived,Eigen::Matrix<double,-1,3,0,-1,3>,Eigen::Matrix<int,-1,-1,0,-1,-1>>(const Eigen::DenseBase<Derived> &,const int,const bool,Eigen::PlainObjectBase<Derived> &,Eigen::PlainObjectBase<Eigen::Matrix<int,-1,-1,0,-1,-1>> &)' being compiled
           with
           [
               Derived=Eigen::Matrix<double,-1,3,0,-1,3>
-          ]
+          ] (compiling source file C:\Users\Dimitri\Documents\INF585\newestCode\inf585_lab_code\INF585-erosion\project_code\src\helpers\initialization.cpp)
 C:\Users\Dimitri\Documents\INF585\newestCode\inf585_lab_code\INF585-erosion\project_code\lib\igl\doublearea.cpp(162,8): message : see reference to function template instantiation 'void igl::sort<Derived,Eigen::Matrix<double,-1,3,0,-1,3>,Eigen::Matrix<int,-1,-1,0,-1,-1>>(const Eigen::DenseBase<Derived> &,const int,const bool,Eigen::PlainObjectBase<Derived> &,Eigen::PlainObjectBase<Eigen::Matrix<int,-1,-1,0,-1,-1>> &)' being compiled
           with
           [
               Derived=Eigen::Matrix<double,-1,3,0,-1,3>
-          ]
+          ] (compiling source file C:\Users\Dimitri\Documents\INF585\newestCode\inf585_lab_code\INF585-erosion\project_code\src\helpers\initialization.cpp)
 C:\Users\Dimitri\Documents\INF585\newestCode\inf585_lab_code\INF585-erosion\project_code\lib\igl\cotmatrix_entries.cpp(48,7): message : see reference to function template instantiation 'void igl::doublearea<Derived,Eigen::Matrix<double,-1,1,0,-1,1>>(const Eigen::MatrixBase<Derived> &,const double,Eigen::PlainObjectBase<Eigen::Matrix<double,-1,1,0,-1,1>> &)' being compiled
           with
           [
               Derived=Eigen::Matrix<double,-1,3,0,-1,3>
-          ]
+          ] (compiling source file C:\Users\Dimitri\Documents\INF585\newestCode\inf585_lab_code\INF585-erosion\project_code\src\helpers\initialization.cpp)
 C:\Users\Dimitri\Documents\INF585\newestCode\inf585_lab_code\INF585-erosion\project_code\lib\igl\cotmatrix.cpp(60,3): message : see reference to function template instantiation 'void igl::cotmatrix_entries<Derived,Eigen::Matrix<int,-1,-1,0,-1,-1>,Eigen::Matrix<double,-1,-1,0,-1,-1>>(const Eigen::MatrixBase<Derived> &,const Eigen::MatrixBase<Eigen::Matrix<int,-1,-1,0,-1,-1>> &,Eigen::PlainObjectBase<Derived> &)' being compiled
           with
           [
               Derived=Eigen::Matrix<double,-1,-1,0,-1,-1>
-          ]
+          ] (compiling source file C:\Users\Dimitri\Documents\INF585\newestCode\inf585_lab_code\INF585-erosion\project_code\src\helpers\initialization.cpp)
 C:\Users\Dimitri\Documents\INF585\newestCode\inf585_lab_code\INF585-erosion\project_code\src\helpers\initialization.cpp(47,10): message : see reference to function template instantiation 'void igl::cotmatrix<Derived,Eigen::Matrix<int,-1,-1,0,-1,-1>,double>(const Eigen::MatrixBase<Derived> &,const Eigen::MatrixBase<Eigen::Matrix<int,-1,-1,0,-1,-1>> &,Eigen::SparseMatrix<double,0,int> &)' being compiled
           with
           [
               Derived=Eigen::Matrix<double,-1,-1,0,-1,-1>
           ]
-C:\Users\Dimitri\Documents\INF585\newestCode\inf585_lab_code\INF585-erosion\project_code\lib\igl\sort.cpp(228,38): warning C4459: declaration of 'Index' hides global declaration
-C:\Users\Dimitri\Documents\INF585\newestCode\inf585_lab_code\INF585-erosion\project_code\lib\eigen-3.4.0\Eigen\src/Core/util/Meta.h(74,40): message : see declaration of 'Eigen::Index'
+C:\Users\Dimitri\Documents\INF585\newestCode\inf585_lab_code\INF585-erosion\project_code\lib\igl\sort.cpp(228,38): warning C4459: declaration of 'Index' hides global declaration (compiling source file C:\Users\Dimitri\Documents\INF585\newestCode\inf585_lab_code\INF585-erosion\project_code\src\helpers\initialization.cpp)
+C:\Users\Dimitri\Documents\INF585\newestCode\inf585_lab_code\INF585-erosion\project_code\lib\eigen-3.4.0\Eigen\src/Core/util/Meta.h(74,40): message : see declaration of 'Eigen::Index' (compiling source file C:\Users\Dimitri\Documents\INF585\newestCode\inf585_lab_code\INF585-erosion\project_code\src\helpers\initialization.cpp)
 C:\Users\Dimitri\Documents\INF585\newestCode\inf585_lab_code\INF585-erosion\project_code\lib\igl\sort.cpp(39,19): message : see reference to function template instantiation 'void igl::sort3<Derived,Eigen::Matrix<double,-1,3,0,-1,3>,Eigen::Matrix<int,-1,-1,0,-1,-1>>(const Eigen::DenseBase<Derived> &,const int,const bool,Eigen::PlainObjectBase<Derived> &,Eigen::PlainObjectBase<Eigen::Matrix<int,-1,-1,0,-1,-1>> &)' being compiled
           with
           [
               Derived=Eigen::Matrix<double,-1,3,0,-1,3>
-          ]
-C:\Users\Dimitri\Documents\INF585\newestCode\inf585_lab_code\INF585-erosion\project_code\lib\igl\parallel_for.h(157,15): warning C4018: '<': signed/unsigned mismatch
+          ] (compiling source file C:\Users\Dimitri\Documents\INF585\newestCode\inf585_lab_code\INF585-erosion\project_code\src\helpers\initialization.cpp)
+C:\Users\Dimitri\Documents\INF585\newestCode\inf585_lab_code\INF585-erosion\project_code\lib\igl\parallel_for.h(157,15): warning C4018: '<': signed/unsigned mismatch (compiling source file C:\Users\Dimitri\Documents\INF585\newestCode\inf585_lab_code\INF585-erosion\project_code\src\helpers\initialization.cpp)
 C:\Users\Dimitri\Documents\INF585\newestCode\inf585_lab_code\INF585-erosion\project_code\lib\igl\parallel_for.h(133,10): message : see reference to function template instantiation 'bool igl::parallel_for<Index,igl::parallel_for::<lambda_946a5f5e8ace55b1c74f1e4340b12c92>,igl::parallel_for::<lambda_866582420a11052db64bc10a9448d1c2>,igl::parallel_for::<lambda_946a5f5e8ace55b1c74f1e4340b12c92>>(const Index,const PreFunctionType &,const FunctionType &,const AccumFunctionType &,const size_t)' being compiled
           with
           [
@@ -46,11 +165,21 @@ C:\Users\Dimitri\Documents\INF585\newestCode\inf585_lab_code\INF585-erosion\proj
               PreFunctionType=igl::parallel_for::<lambda_946a5f5e8ace55b1c74f1e4340b12c92>,
               FunctionType=igl::parallel_for::<lambda_866582420a11052db64bc10a9448d1c2>,
               AccumFunctionType=igl::parallel_for::<lambda_946a5f5e8ace55b1c74f1e4340b12c92>
-          ]
+          ] (compiling source file C:\Users\Dimitri\Documents\INF585\newestCode\inf585_lab_code\INF585-erosion\project_code\src\helpers\initialization.cpp)
 C:\Users\Dimitri\Documents\INF585\newestCode\inf585_lab_code\INF585-erosion\project_code\lib\igl\doublearea.cpp(168,3): message : see reference to function template instantiation 'bool igl::parallel_for<Index,igl::doublearea::<lambda_68877b35a93cbac5e1ff095c5c17bfef>>(const Index,const FunctionType &,const size_t)' being compiled
           with
           [
               Index=Index,
               FunctionType=igl::doublearea::<lambda_68877b35a93cbac5e1ff095c5c17bfef>
-          ]
+          ] (compiling source file C:\Users\Dimitri\Documents\INF585\newestCode\inf585_lab_code\INF585-erosion\project_code\src\helpers\initialization.cpp)
+  special_types.cpp
+  special_types.cpp
+  imgui.cpp
+  environment.cpp
+  glad.cpp
+  glad.cpp
+  glad.cpp
+  glad.cpp
+  imgui.cpp
+  environment.cpp
   project_code.vcxproj -> C:\Users\Dimitri\Documents\INF585\newestCode\inf585_lab_code\INF585-erosion\project_code\project_code.exe
