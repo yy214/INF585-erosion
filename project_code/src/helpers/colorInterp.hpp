@@ -4,6 +4,4 @@
 using namespace cgp;
 namespace colorInterpolation {
 	cgp::vec3 getColor(float height);
-	
-
 }

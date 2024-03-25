@@ -9,8 +9,6 @@
 #include "erosion/flood_fill.hpp"
 #include "helpers/colorInterp.hpp"
 
-//do not use add file???
-
 #include <Eigen/Dense>
 #include <Eigen/Sparse>
 #include <cotmatrix.h>
@@ -31,41 +29,37 @@ using namespace StreamTree;
 /// <returns></returns>
 mesh initialize_plane()
 {
+    // 70 nodes seem to decent for finding good stable parameters
 	int const N = 70;
     
+    // The Initial Mesh is a flat plane
     cgp::mesh initMesh = mesh_primitive_grid({ -1,-1,0 }, { 1,-1,0 }, { 1,1,0 }, { -1,1,0 }, N, N);
 
+    // Vectors for constructing the initial terrain
     vec3 const translation_normal = vec3(0.0, 0.0, 10.0);
-
     vec3 const translation_x = vec3(10.0, 0.0, 10.0);
     vec3 const translation_y = vec3(0.0, 10.0, 0.0);
 
-    //size_t const N = shape.position.size();
+    // Iterating over all the grid vertices
     for (size_t k = 0; k < N*N; ++k)
     {
+            // Getting noise data from the 2-D Perlin function
             vec3& p_shape = initMesh.position[k];
             float noise = noise_perlin(1.5f * p_shape,10,0.3,1.5);
 
-            //stackoverflow.com/questions/10847007/using-the-gaussian-probability-density-function-in-c
-            float THE_DISTANCE = (pow((initMesh.position[k][0] - 0.0), 2) + pow((initMesh.position[k][1] - 0.0), 2));  // I must make this nicer later
-            //noise *= (1 - pow(THE_DISTANCE,0.2));
+            //SOURCE: stackoverflow.com/questions/10847007/using-the-gaussian-probability-density-function-in-c
+            float THE_DISTANCE = (pow((initMesh.position[k][0] - 0.0), 2) + pow((initMesh.position[k][1] - 0.0), 2));
             float const gaussian = normal_pdf(THE_DISTANCE, 0.0, 0.3)*0.8;
 
             p_shape += (gaussian + noise - 1.0) * 0.05 * translation_normal;
-            //initMesh.color[k][0] = (p_shape.z - 0.25) * 10.0;
-            //initMesh.color[k] = getColor(p_shape[2]);
 
-            //Just to add a bit of random noise (these numbers are indeed correct)
+            //Just to add a bit of random noise (Note: these numbers are indeed correct)
             p_shape +=  translation_x * (rand() - 0.5) * 0.00000006f * float(100.f/N);
             p_shape += translation_y * (rand() - 0.5) * 0.00000006f * float(100.f / N);
 
+            initMesh.color[k] = getColor(p_shape[2]);
+
     }
-    
-    //initMesh.color[k][0] = (p_shape.z - 0.25) * 10.0;
-    //int2 colorTextCoord = int2(5,5);
-    //int2 colorTestCoord = getCoord(index, N);
-    //int colorIndex = getIndex(colorTextCoord[0], colorTextCoord[1],N);
-    //initMesh.color[colorIndex][1] = 100;
 
     return initMesh;
 }

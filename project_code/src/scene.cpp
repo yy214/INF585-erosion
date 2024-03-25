@@ -69,9 +69,6 @@ void scene_structure::initialize()
 		nextRow << deforming_shape.shape.connectivity[i][0], deforming_shape.shape.connectivity[i][1], deforming_shape.shape.connectivity[i][2];
 		eigenConnectivity.row(i) = nextRow;
 	}
-	//HalfedgeBuilder builder = HalfedgeBuilder();
-	//HalfedgeDS eMesh = 
-	//deforming_shape.halfEdgeDS = std::unique_ptr<HalfedgeDS>(builder.createMesh(eigenConnectivity.rows(), eigenConnectivity));
 
 
 }
@@ -137,6 +134,7 @@ void scene_structure::keyboard_event()
 	camera_control.action_keyboard(environment.camera_view);
 	if (inputs.keyboard.down)
 	{
+		//////// If you would like to smoothe the terrain, you can press the down key
 		vec3 translationVec = vec3(0.0f, 0.0f, 0.05f);
 
 		// Current translation in 2D window coordinates
@@ -175,32 +173,11 @@ void scene_structure::keyboard_event()
 				vertexCount += 1;
 				pEdge = eMesh.getOpposite(eMesh.getNext(pEdge));
 				surroundPos = deforming_shape.position_saved[eMesh.getTarget(eMesh.getOpposite(pEdge))];
-				//surroundPos[2] = pow(surroundPos[2], 0.5);
 				sumVertices += surroundPos;
 				sumZ += surroundPos[2];
 			}
-
-			//sumVertices /= float(vertexCount);
-
-
-			
-
-
-			//deforming_shape.shape.position[v] = sumVertices / float(vertexCount);
 			deforming_shape.shape.position[v][2] = sumZ / float(vertexCount);
-			//deforming_shape.shape.position[v] -= translationVec;
-			
-			
-			///Changes the color dynamically
-			deforming_shape.shape.color[v][0] = (deforming_shape.shape.position[v][2] - 0.25) * 5.0;
-			/////deforming_shape.shape.color[v] = color
 		}
-
-		
-		//
-		//for (int v = 0; v < deforming_shape.shape.position.size(); v++) {
-		//	deforming_shape.shape.position[v] += translationVec;
-		//}
 
 		// Update the visual model
 		

@@ -1,26 +1,32 @@
 #include "flood_fill.hpp"
 #include "datastructure/gridTools.hpp"
-
 #include <queue>
 
 cgp::grid_2D<short> floodFill::getfloodBool(cgp::mesh const& m,int initialIndex)
 {
+	// Getting the grid sizes
 	int N = m.position.size();
 	int dim = std::sqrt(N);
 	int2 currPoint = getCoord(initialIndex, dim);
 
+	// Grid-like bool structure for if a node is part of the sea or not
 	cgp::grid_2D<short> floodBool = cgp::grid_2D<short>(dim,dim);
+
+	// Keeps track if we have already visited this node in this function call
 	cgp::grid_2D<short> visitedBool = cgp::grid_2D<short>(dim,dim);
 
+	// Initializing bools
 	floodBool.fill(0);
 	visitedBool.fill(0);
 	
 
-	//the queue to search all the points
+	// The queue to search all the points on the grid
 	std::queue<int2> coordQueue;
 
 	coordQueue.push(currPoint);
-	//Also push many more points
+
+	// Also push many more points, in case the original point ends up on a mini-island,
+	// stopping the flood fill
 	coordQueue.push(int2(dim-1,dim-1));
 	coordQueue.push(int2(0, dim-1));
 	coordQueue.push(int2(dim-1, dim-1));
@@ -30,15 +36,17 @@ cgp::grid_2D<short> floodFill::getfloodBool(cgp::mesh const& m,int initialIndex)
 	int counter = 0;
 	while (coordQueue.size() > 0) {
 		counter += 1;
-		//std::cout << counter;
 
-		//getting the next coordinate to check flood
+		// Askking the queue what point we should visit next, and removing it from the queue
 		currPoint = coordQueue.front();
 		coordQueue.pop();
+
+		// Converting from coordinate to index in mesh
 		int currIndex = getIndex(currPoint[0], currPoint[1], dim);
 
 		visitedBool(currPoint[0], currPoint[1]) = 1;
 
+		//Sea nodes are those below y=0
 		if (m.position[currIndex][2] < 0.0) {
 			floodBool(currPoint[0], currPoint[1]) = 1;
 		}
@@ -46,6 +54,8 @@ cgp::grid_2D<short> floodFill::getfloodBool(cgp::mesh const& m,int initialIndex)
 			continue;
 		}
 		
+		/////// Checking points in all 4 directions around the current node
+
 		//Top
 		if (currPoint[1] < dim - 1 && visitedBool(currPoint[0],currPoint[1]+1) == 0) {
 			int2 topPoint = currPoint;
@@ -77,28 +87,7 @@ cgp::grid_2D<short> floodFill::getfloodBool(cgp::mesh const& m,int initialIndex)
 			coordQueue.push(leftPoint);
 			visitedBool(leftPoint[0], leftPoint[1]) = 1;
 		}
-		
-		
-
-		//explore itself and its neighbors
-		//changeme to have int2??
-		
-		
-	
 	}
-
-	
-	//visitedBool[{currIndex}] = true;
-	//visitedBool(4,4) = 3;
-
-	//std::cout << visitedBool;
-	//std::cout << "got here";
-	//std::cout << floodBool;
-
-	//m.color[0][0] = 0;
-
-
-
 
 	return floodBool;
 }
