@@ -51,8 +51,8 @@ mesh initialize_plane()
             p_shape += (gaussian + noise - 1.0) * 0.05 * translation_normal;
 
             //Just to add a bit of random noise (Note: these numbers are indeed correct)
-            p_shape +=  translation_x * (rand() - 0.5) * 0.00000006f * float(100.f/N);
-            p_shape += translation_y * (rand() - 0.5) * 0.00000006f * float(100.f / N);
+            //p_shape += translation_x * (rand() - 0.5) * 0.00000006f * float(100.f/N);
+            //p_shape += translation_y *(rand() - 0.5) * 0.00000006f * float(100.f / N);
 
             initMesh.color[k] = getColor(p_shape[2]);
 

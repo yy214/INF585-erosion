@@ -2,8 +2,4 @@
 
 #include "cgp/cgp.hpp"
 
-namespace floodFill {
-
-	cgp::grid_2D<short> getfloodBool(cgp::mesh const& m,int initialIndex);
-
-}
+cgp::grid_2D<short> getfloodBool(cgp::mesh const& m);

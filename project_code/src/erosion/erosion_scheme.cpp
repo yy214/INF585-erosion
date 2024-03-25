@@ -31,12 +31,12 @@ void ErosionScheme::applyErosionStep(cgp::mesh& m, cgp::grid_2D<cgp::int2> const
 			// This is a Sea node
 			m.color[colorIndex] = vec3(100.0, 0.0, 0.0);
 			float h = get_height(m, v, N) + uplift*step;
-			//h = (1.f * ((h + 1.f) * (h + 1.f) - 1) + 99.f * h) / 100.f;
+			h = (1.f * ((h + 0.5f) * (h + 0.5f) - 0.5f) + 999.f * h) / 1000.f; //prevents sea from completely dissapearing
 			get_height(m, v, N) = h;
 		}
 		else {
 			int2 receiver = stream_tree(v);
-			float receiver_height = -0.f; //get sea erosion going
+			float receiver_height = -0.f; 
 			if (receiver == StreamTree::SEA) {
 				// This is an Outflow node
 				m.color[colorIndex] = vec3(100.0, 100.0, 100.0);
@@ -67,7 +67,9 @@ void ErosionScheme::applyErosionStep(cgp::mesh& m, cgp::grid_2D<cgp::int2> const
 void ErosionScheme::erodeOnce(cgp::mesh& m, gui_parameters const& gui_param) {
 	size_t N = std::sqrt(m.position.size());
 	
-	cgp::grid_2D<short> is_sea = floodFill::getfloodBool(m, 0);
+	cgp::grid_2D<short> is_sea = getfloodBool(m);
+	
+	//std::cout << is_sea << std::endl;
 
 	// Debugging statements included
 	//std::cout << "building base stream tree" << std::endl;

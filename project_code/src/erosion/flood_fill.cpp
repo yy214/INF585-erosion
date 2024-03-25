@@ -2,97 +2,54 @@
 #include "datastructure/gridTools.hpp"
 #include <queue>
 
-cgp::grid_2D<short> floodFill::getfloodBool(cgp::mesh const& m,int /*initialIndex*/)
+static cgp::int2 const directions[4] = { {1,0}, {0,1}, {-1, 0}, {0, -1} };
+
+cgp::grid_2D<short> getfloodBool(cgp::mesh const& m)
 {
 	// Getting the grid sizes
 	int N = m.position.size();
 	int dim = std::sqrt(N);
-	//int2 currPoint = getCoord(initialIndex, dim);
 
-	// Grid-like bool structure for if a node is part of the sea or not
-	cgp::grid_2D<short> floodBool = cgp::grid_2D<short>(dim,dim);
-
-	// Keeps track if we have already visited this node in this function call
-	cgp::grid_2D<short> visitedBool = cgp::grid_2D<short>(dim,dim);
-
-	// Initializing bools
+	cgp::grid_2D<short> floodBool;
+	floodBool.resize(dim);
 	floodBool.fill(0);
-	visitedBool.fill(0);
-	
 
-	// The queue to search all the points on the grid
-	std::queue<int2> coordQueue;
-	
+	std::queue<cgp::int2> exploration;
 
-	// Also push many more points, in case the original point ends up on a mini-island,
-	// stopping the flood fill
-	/*for (int i = 0; i < dim; i++) {
-		coordQueue.push(int2(0, i));
-		coordQueue.push(int2(i, 0));
-		coordQueue.push(int2(dim-1, i));
-		coordQueue.push(int2(i, dim-1));
-	}*/
-	coordQueue.push(int2(0, dim-1));
-	coordQueue.push(int2(0, 0));
-	coordQueue.push(int2(dim - 1, dim - 1));
-	coordQueue.push(int2(dim - 1, 0));
-
-	int counter = 0;
-	while (coordQueue.size() > 0) {
-		counter += 1;
-
-		// Askking the queue what point we should visit next, and removing it from the queue
-		int2 currPoint = coordQueue.front();
-		coordQueue.pop();
-		if (visitedBool(currPoint)) continue;
-
-		// Converting from coordinate to index in mesh
-		int currIndex = getIndex(currPoint[0], currPoint[1], dim);
-
-		visitedBool(currPoint[0], currPoint[1]) = 1;
-
-		//Sea nodes are those below y=0
-		if (m.position[currIndex][2] < 0.0) {
-			floodBool(currPoint[0], currPoint[1]) = 1;
-		}
-		else {
-			continue;
-		}
-		
-		/////// Checking points in all 4 directions around the current node
-
-		//Top
-		if (currPoint[1] < dim - 1 && visitedBool(currPoint[0],currPoint[1]+1) == 0) {
-			int2 topPoint = currPoint;
-			topPoint[1] += 1;
-			coordQueue.push(topPoint);
-			visitedBool(topPoint[0], topPoint[1]) = 1;
-		}
-
-		//Bottom
-		if (currPoint[1] > 0 && visitedBool(currPoint[0], currPoint[1] - 1) == 0) {
-			int2 botPoint = currPoint;
-			botPoint[1] += -1;
-			coordQueue.push(botPoint);
-			visitedBool(botPoint[0], botPoint[1]) = 1;
-		}
-
-		//Right
-		if (currPoint[0] < dim - 1 && visitedBool(currPoint[0] + 1, currPoint[1]) == 0) {
-			int2 rightPoint = currPoint;
-			rightPoint[0] += 1;
-			coordQueue.push(rightPoint);
-			visitedBool(rightPoint[0], rightPoint[1]) = 1;
-		}
-
-		//Left
-		if (currPoint[0] > 0 && visitedBool(currPoint[0] - 1, currPoint[1]) == 0) {
-			int2 leftPoint = currPoint;
-			leftPoint[0] += -1;
-			coordQueue.push(leftPoint);
-			visitedBool(leftPoint[0], leftPoint[1]) = 1;
+	for (int i = 0; i < dim; i++) {
+		cgp::int2 p = int2(i, 0);
+		floodBool(p) = 1;
+		exploration.push(p);
+	}
+	for (int i = 0; i < dim; i++) {
+		cgp::int2 p = int2(0, i);
+		floodBool(p) = 1;
+		exploration.push(p);
+	}
+	for (int i = 0; i < dim; i++) {
+		cgp::int2 p = int2(i, dim-1);
+		floodBool(p) = 1;
+		exploration.push(p);
+	}
+	for (int i = 0; i < dim; i++) {
+		cgp::int2 p = int2(dim-1, i);
+		floodBool(p) = 1;
+		exploration.push(p);
+	}
+	//std::cout << dim << std::endl;
+	while (!exploration.empty()) {
+		cgp::int2 currPos = exploration.front();
+		exploration.pop();
+		floodBool(currPos) = 1;
+		for (int dir = 0; dir < 4; dir++) {
+			cgp::int2 nextPos = currPos + directions[dir];
+			if (nextPos.x < 0 || nextPos.x >= dim || nextPos.y < 0 || nextPos.y >= dim) continue;
+			//std::cout << nextPos << " inside" << std::endl;
+			if (get_height(m, nextPos, dim) < 0.f && floodBool(nextPos) == 0) {
+				floodBool(nextPos) = 1;
+				exploration.push(nextPos);
+			}
 		}
 	}
-
 	return floodBool;
 }
