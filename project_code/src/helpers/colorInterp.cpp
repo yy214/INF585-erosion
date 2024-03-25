@@ -4,9 +4,6 @@ using namespace std;
 
 cgp::vec3 colorInterpolation::getColor(float height)
 {
-	if (height > 1) {
-		height = 1;
-	}
 
 	cgp::vec3 newColor;
 	
@@ -25,15 +22,14 @@ cgp::vec3 colorInterpolation::getColor(float height)
 	// Black is for the depths of the sea
 	cgp::vec3 blackVec = cgp::vec3(0.0, 0.0, 0.0);
 
-	float cutoff = 0.0;
-	float cutoffOne = 0.3;
-	float cutoffTwo = 0.70;
-
+	float cutoff = 0.f;
+	float cutoffOne = 0.3f;
+	float cutoffTwo = 0.7f;
 
 
 	if (height < cutoff) {
 		// Coloring the Sea
-		float alpha = -1*height * 1.0;
+		float alpha = std::min(-height, 1.f);
 		newColor = alpha * blackVec + (1-alpha)*blueVec;
 	}
 	else if (height < cutoffOne) {
@@ -42,11 +38,14 @@ cgp::vec3 colorInterpolation::getColor(float height)
 		newColor = alpha * greenVec + (1.0 - alpha) * brownVec;
 	
 	}
-	else {
+	else if(height < cutoffTwo){
 		// Coloring the Mountain and Peaks
 		float beta = (cutoffTwo - height) / (cutoffTwo - cutoff);
 		beta = std::pow(beta,0.3);
 		newColor = beta * brownVec + (1.0 - beta) * whiteVec;
+	}
+	else {
+		newColor = whiteVec;
 	}
 	return newColor;
 }

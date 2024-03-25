@@ -2,12 +2,12 @@
 #include "datastructure/gridTools.hpp"
 #include <queue>
 
-cgp::grid_2D<short> floodFill::getfloodBool(cgp::mesh const& m,int initialIndex)
+cgp::grid_2D<short> floodFill::getfloodBool(cgp::mesh const& m,int /*initialIndex*/)
 {
 	// Getting the grid sizes
 	int N = m.position.size();
 	int dim = std::sqrt(N);
-	int2 currPoint = getCoord(initialIndex, dim);
+	//int2 currPoint = getCoord(initialIndex, dim);
 
 	// Grid-like bool structure for if a node is part of the sea or not
 	cgp::grid_2D<short> floodBool = cgp::grid_2D<short>(dim,dim);
@@ -22,24 +22,29 @@ cgp::grid_2D<short> floodFill::getfloodBool(cgp::mesh const& m,int initialIndex)
 
 	// The queue to search all the points on the grid
 	std::queue<int2> coordQueue;
-
-	coordQueue.push(currPoint);
+	
 
 	// Also push many more points, in case the original point ends up on a mini-island,
 	// stopping the flood fill
-	coordQueue.push(int2(dim-1,dim-1));
+	/*for (int i = 0; i < dim; i++) {
+		coordQueue.push(int2(0, i));
+		coordQueue.push(int2(i, 0));
+		coordQueue.push(int2(dim-1, i));
+		coordQueue.push(int2(i, dim-1));
+	}*/
 	coordQueue.push(int2(0, dim-1));
-	coordQueue.push(int2(dim-1, dim-1));
-	coordQueue.push(int2(int(dim/2), dim-1));
-
+	coordQueue.push(int2(0, 0));
+	coordQueue.push(int2(dim - 1, dim - 1));
+	coordQueue.push(int2(dim - 1, 0));
 
 	int counter = 0;
 	while (coordQueue.size() > 0) {
 		counter += 1;
 
 		// Askking the queue what point we should visit next, and removing it from the queue
-		currPoint = coordQueue.front();
+		int2 currPoint = coordQueue.front();
 		coordQueue.pop();
+		if (visitedBool(currPoint)) continue;
 
 		// Converting from coordinate to index in mesh
 		int currIndex = getIndex(currPoint[0], currPoint[1], dim);

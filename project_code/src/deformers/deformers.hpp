@@ -19,7 +19,7 @@ enum deformer_direction_enum {
 
 struct deformer_parameters_structure {
 	deformer_type_enum type           = deform_translate;      // Type of deformation type
-	deformer_direction_enum direction = direction_view_space;  // Type of deformation direction
+	deformer_direction_enum direction = direction_z;  // Type of deformation direction
 	float falloff                     = 1 / 5.0f;              // Falloff/influence distance (can be adjusted from the GUI or with mouse scroll)
 };
 

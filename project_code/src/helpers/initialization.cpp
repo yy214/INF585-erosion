@@ -16,9 +16,6 @@
 
 
 
-
-
-
 using namespace cgp;
 using namespace colorInterpolation;
 using namespace StreamTree;
@@ -30,7 +27,7 @@ using namespace StreamTree;
 mesh initialize_plane()
 {
     // 70 nodes seem to decent for finding good stable parameters
-	int const N = 70;
+	int const N = 300;
     
     // The Initial Mesh is a flat plane
     cgp::mesh initMesh = mesh_primitive_grid({ -1,-1,0 }, { 1,-1,0 }, { 1,1,0 }, { -1,1,0 }, N, N);
